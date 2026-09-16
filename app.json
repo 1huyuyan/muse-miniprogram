@@ -1,0 +1,22 @@
+{
+  "pages": [
+    "pages/splash/splash",
+    "pages/index/index",
+    "pages/result/result",
+    "pages/detail/detail",
+    "pages/settings/settings"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#1a1a2e",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "缪斯",
+    "backgroundColor": "#f6f7fb"
+  },
+  "permission": {
+    "scope.camera": {
+      "desc": "用于拍摄朋友物品照片进行送礼分析"
+    }
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

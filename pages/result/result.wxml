@@ -1,0 +1,60 @@
+<view class="container">
+  <!-- IP 识别横幅：识别到明星/动漫角色时，说明已优先周边/联名 -->
+  <view class="card ip-banner" wx:if="{{ip && ip.name}}">
+    <view class="ip-title">
+      <text class="ip-badge">IP 识别</text>
+      <text class="ip-name">{{ip.name}}{{ip.work ? ' · ' + ip.work : ''}}</text>
+    </view>
+    <view class="ip-note">已优先推荐与该 IP 相关的周边、联名、收藏类礼物</view>
+  </view>
+
+  <!-- 收礼人画像 -->
+  <view class="card" wx:if="{{persona}}">
+    <view class="title-md">收礼人画像</view>
+    <view class="persona-summary">{{persona.summary}}</view>
+    <view class="chips">
+      <view class="chip" wx:for="{{persona.style}}" wx:key="*this">风格 · {{item}}</view>
+      <view class="chip" wx:for="{{persona.interests}}" wx:key="*this">兴趣 · {{item}}</view>
+      <view class="chip warn" wx:for="{{persona.forbidden}}" wx:key="*this">避雷 · {{item}}</view>
+    </view>
+  </view>
+
+  <!-- 推荐榜（前三） -->
+  <view class="card">
+    <view class="title-md">推荐榜 Top 3</view>
+    <view class="rank-item" wx:for="{{rank}}" wx:key="id" data-idx="{{index}}" bindtap="goDetail">
+      <view class="rank-badge rank-{{index + 1}}">{{index + 1}}</view>
+      <image class="rank-thumb" wx:if="{{item.image}}" src="{{item.image}}" mode="aspectFill" lazy-load="{{true}}"></image>
+      <view class="rank-info">
+        <view class="rank-head">
+          <view class="rank-name">{{item.name}}</view>
+          <text class="rank-brand" wx:if="{{item.brand}}">{{item.brand}}</text>
+        </view>
+        <view class="rank-price">参考价 {{item.price}}</view>
+        <view class="rank-tags">
+          <text class="r-tag" wx:for="{{item.tags}}" wx:for-item="t" wx:key="*this">{{t}}</text>
+        </view>
+        <view class="rank-reason">推荐理由：{{item.reason}}</view>
+      </view>
+    </view>
+
+    <!-- 避雷榜 -->
+    <view class="avoid-trigger" bindtap="toggleAvoid">{{showAvoid ? '收起避雷榜' : '查看避雷榜'}}</view>
+    <view class="avoid-list" wx:if="{{showAvoid}}">
+      <view class="avoid-item" wx:for="{{avoid}}" wx:key="id">
+        <view class="avoid-name"><text class="avoid-icon">⚠</text>{{item.name}}</view>
+        <view class="avoid-reason">{{item.reason}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 送礼话术 -->
+  <view class="card" wx:if="{{talk}}">
+    <view class="title-md">送礼话术建议</view>
+    <view class="talk">{{talk}}</view>
+  </view>
+
+  <view class="action">
+    <view class="btn-plain" bindtap="reAnalyze">重新分析</view>
+  </view>
+</view>

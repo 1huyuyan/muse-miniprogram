@@ -1,0 +1,26 @@
+<view class="splash">
+  <view class="glow glow-1"></view>
+  <view class="glow glow-2"></view>
+  <view class="glow glow-3"></view>
+  <view class="rings">
+    <view class="ring ring-1"></view>
+    <view class="ring ring-2"></view>
+  </view>
+
+  <view class="hero {{show ? 'fade-in' : ''}}">
+    <view class="logo">
+      <view class="logo-icon">M</view>
+    </view>
+    <view class="title">缪 斯</view>
+    <view class="subtitle">AI 送礼灵感 · 由照片到心意</view>
+  </view>
+
+  <view class="footer {{show ? 'fade-in' : ''}}">
+    <view class="line"></view>
+    <view class="loading-dots">
+      <view class="ldot ldot-1"></view>
+      <view class="ldot ldot-2"></view>
+      <view class="ldot ldot-3"></view>
+    </view>
+  </view>
+</view>

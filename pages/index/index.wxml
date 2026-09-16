@@ -1,0 +1,51 @@
+<view class="container">
+  <!-- 顶部 -->
+  <view class="hero">
+    <view class="title-lg">怕买错送给她/他？</view>
+    <view class="sub">上传朋友照片 + 补充线索，AI 帮你精准挑礼物</view>
+  </view>
+
+  <!-- 上传照片 -->
+  <view class="card">
+    <view class="title-md">1. 上传朋友的照片</view>
+    <view class="img-grid">
+      <view class="img-item" wx:for="{{images}}" wx:key="index">
+        <image class="img" src="{{item}}" mode="aspectFill" />
+        <view class="img-del" data-idx="{{index}}" catchtap="removeImage">×</view>
+      </view>
+      <view class="img-add" wx:if="{{images.length < 9}}" bindtap="chooseImages">
+        <text class="plus">+</text>
+        <text class="add-text">添加照片</text>
+      </view>
+    </view>
+    <view class="text-muted">可拍朋友圈、头像、生活照等</view>
+  </view>
+
+  <!-- 预算区间 -->
+  <view class="card">
+    <view class="title-md">预算区间（可选，推荐更贴合）</view>
+    <view class="price-row">
+      <input class="line-ipt price-ipt" type="digit" placeholder="最低价" placeholder-class="ph" value="{{minPrice}}" data-field="minPrice" bindinput="onPriceInput" />
+      <text class="price-sep">-</text>
+      <input class="line-ipt price-ipt" type="digit" placeholder="最高价" placeholder-class="ph" value="{{maxPrice}}" data-field="maxPrice" bindinput="onPriceInput" />
+      <text class="price-unit">元</text>
+    </view>
+  </view>
+
+  <!-- 补充线索 -->
+  <view class="card">
+    <view class="title-md">2. 补充线索（可选，推荐更准）</view>
+    <input class="line-ipt" placeholder="例如：她最近刚换了工作，想送点实用的" placeholder-class="ph" value="{{input}}" bindinput="onInput" />
+    <view class="tag-wrap">
+      <view class="{{item.checked ? 'tag active' : 'tag'}}" wx:for="{{tags}}" wx:key="text" data-idx="{{index}}" bindtap="toggleTag">{{item.text}}</view>
+    </view>
+  </view>
+
+  <!-- 行动 -->
+  <view class="action">
+    <view class="btn-primary {{loading ? 'disabled' : ''}}" bindtap="analyze">
+      {{loading ? '正在分析...' : '开始分析推荐'}}
+    </view>
+    <view class="btn-plain link" bindtap="goSettings">接口设置</view>
+  </view>
+</view>

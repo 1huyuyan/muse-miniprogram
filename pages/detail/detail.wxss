@@ -1,0 +1,20 @@
+.brand-sub { color: #9a9ab0; font-size: 26rpx; margin-top: 10rpx; }
+.good-img {
+  width: 100%; height: 400rpx; border-radius: 16rpx;
+  margin-bottom: 20rpx; background: #f0f0f6;
+}
+.desc { color: #555; font-size: 28rpx; margin: 16rpx 0; line-height: 1.6; }
+.tags { margin-top: 8rpx; }
+
+.reason-card { background: #f6f5ff; border: 2rpx solid #e4e1ff; }
+.reason-copy { margin-top: 16rpx; font-size: 28rpx; line-height: 1.7; color: #444; }
+.tag-match { margin-top: 14rpx; }
+.match-text { color: #6c5ce7; font-size: 26rpx; }
+
+.talk-copy { font-size: 28rpx; line-height: 1.7; color: #555; margin-bottom: 16rpx; }
+.mini { padding: 12rpx 0; font-size: 26rpx; margin-top: 16rpx; }
+
+.card-box { background: #fff; border: 2rpx dashed #c4b5ff; border-radius: 16rpx; padding: 24rpx; margin-top: 16rpx; }
+.card-text { font-size: 28rpx; line-height: 1.8; color: #3a3a55; font-style: italic; }
+.gen { margin-top: 20rpx; }
+.foot { text-align: center; padding: 20rpx 0 60rpx; }

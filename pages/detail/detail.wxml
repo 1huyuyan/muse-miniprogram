@@ -1,0 +1,40 @@
+<view class="container" wx:if="{{good}}">
+  <!-- 商品基本信息 -->
+  <view class="card">
+    <image class="good-img" wx:if="{{good.image}}" src="{{good.image}}" mode="aspectFill"></image>
+    <view class="title-lg">{{good.name}}</view>
+    <view class="brand-sub">{{good.brand}} · 参考价 {{good.price}}</view>
+    <view class="desc">{{good.desc}}</view>
+    <view class="tags">
+      <text class="tag" wx:for="{{good.tags}}" wx:key="*this">{{item}}</text>
+    </view>
+  </view>
+
+  <!-- 推荐理由卡片（建立信任） -->
+  <view class="card reason-card">
+    <view class="title-md">为什么推荐它</view>
+    <view class="reason-copy">{{reason || good.reason}}</view>
+    <view class="tag-match" wx:if="{{good.tags}}">
+      <text class="match-text">风格关联度：{{good.tags.length > 2 ? '高' : '中'}}</text>
+    </view>
+  </view>
+
+  <!-- 送礼话术 -->
+  <view class="card" wx:if="{{talk}}">
+    <view class="title-md">送礼话术</view>
+    <view class="talk-copy">{{talk}}</view>
+    <view class="btn-plain mini" bindtap="copyTalk">复制话术</view>
+  </view>
+
+  <!-- AI 贺卡 -->
+  <view class="card">
+    <view class="title-md">AI 生成电子贺卡</view>
+    <view class="card-box" wx:if="{{cardText}}">
+      <view class="card-text">{{cardText}}</view>
+      <view class="btn-plain mini" bindtap="copyCard">复制贺卡文案</view>
+    </view>
+    <view class="btn-primary gen" bindtap="genCard">{{loadingCard ? '生成中...' : '生成贺卡文案'}}</view>
+  </view>
+
+  <view class="foot text-muted">购买跳转与全网比价将在接电商联盟后开放（需企业主体）</view>
+</view>

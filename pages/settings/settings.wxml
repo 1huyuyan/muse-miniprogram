@@ -1,0 +1,26 @@
+<view class="container">
+  <view class="card">
+    <view class="title-md">接口配置（存本地，不上传）</view>
+    <view class="field">
+      <text class="label">接口地址 Base URL</text>
+      <input class="ipt" value="{{cfg.base_url}}" data-field="base_url" bindinput="onInput" placeholder="如 https://open.bigmodel.cn/api/paas/v4" placeholder-class="ph" />
+    </view>
+    <view class="field">
+      <text class="label">API Key</text>
+      <input class="ipt" value="{{cfg.api_key}}" data-field="api_key" bindinput="onInput" password placeholder="sk-xxx" placeholder-class="ph" />
+    </view>
+    <view class="field">
+      <text class="label">视觉模型（识图）</text>
+      <input class="ipt" value="{{cfg.vision_model}}" data-field="vision_model" bindinput="onInput" placeholder="glm-4v-flash" placeholder-class="ph" />
+    </view>
+    <view class="field">
+      <text class="label">文本模型（推荐/文案）</text>
+      <input class="ipt" value="{{cfg.text_model}}" data-field="text_model" bindinput="onInput" placeholder="glm-4-flash" placeholder-class="ph" />
+    </view>
+    <view class="btns">
+      <view class="btn-primary save" bindtap="save">保存配置</view>
+      <view class="btn-plain clear" bindtap="clear">清除配置</view>
+    </view>
+  </view>
+  <view class="tips text-muted">Key 仅保存在本机微信本地存储中，不会写入源码或上传服务器，可随时清除。</view>
+</view>
