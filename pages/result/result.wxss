@@ -13,8 +13,6 @@
   background: #f1efff; color: #6c5ce7; border-radius: 30rpx;
   padding: 8rpx 20rpx; font-size: 24rpx; margin: 0 12rpx 12rpx 0;
 }
-.chip.warn { background: #ffefef; color: #e17055; }
-
 .rank-item { display: flex; align-items: flex-start; margin: 24rpx 0; }
 .rank-thumb {
   width: 140rpx; height: 140rpx; border-radius: 16rpx;
@@ -40,19 +38,50 @@
   background: #f4f5fa; color: #7a7a92; font-size: 22rpx;
   border-radius: 20rpx; padding: 4rpx 16rpx; margin-right: 10rpx;
 }
-.rank-reason { margin-top: 12rpx; font-size: 26rpx; color: #6c5ce7; background: #f6f5ff; padding: 14rpx; border-radius: 12rpx; line-height: 1.6; }
-
-.avoid-trigger { text-align: center; color: #e17055; font-size: 26rpx; margin-top: 20rpx; }
-.avoid-item {
-  background: #fff6f6; border-radius: 12rpx; padding: 16rpx;
-  margin-top: 14rpx;
+.rank-relation {
+  margin-top: 6rpx;
+  font-size: 22rpx;
+  color: #b08968;
+  background: #faf3ea;
+  border-radius: 8rpx;
+  padding: 6rpx 12rpx;
+  display: inline-block;
 }
-.avoid-icon { margin-right: 8rpx; }
-.avoid-name { font-size: 28rpx; color: #c0392b; font-weight: 500; }
-.avoid-reason { font-size: 24rpx; color: #888; margin-top: 8rpx; line-height: 1.5; }
+
+.rag-degraded {
+  margin: 16rpx 0;
+  padding: 14rpx 18rpx;
+  border-radius: 12rpx;
+  background: #fdf6ec;
+  border: 1rpx dashed #e0b27a;
+  color: #9a6b3f;
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+
+.ip-miss {
+  margin: 16rpx 0;
+  padding: 14rpx 18rpx;
+  border-radius: 12rpx;
+  background: #f4f6fb;
+  border: 1rpx dashed #9aa5c9;
+  color: #6b7a99;
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+
+.rank-reason { margin-top: 12rpx; font-size: 26rpx; color: #6c5ce7; background: #f6f5ff; padding: 14rpx; border-radius: 12rpx; line-height: 1.6; }
 
 .talk {
   margin-top: 16rpx; background: #f6f5ff; border-radius: 12rpx;
   padding: 20rpx; font-size: 28rpx; line-height: 1.7; color: #555;
 }
 .action { padding: 20rpx 0 60rpx; }
+
+/* 不满意反馈入口 */
+.feedback-input-wrap { margin: 16rpx 0 20rpx; }
+.feedback-input {
+  width: 100%; box-sizing: border-box;
+  background: #f4f5fa; border-radius: 12rpx;
+  padding: 20rpx; font-size: 28rpx; min-height: 120rpx;
+}

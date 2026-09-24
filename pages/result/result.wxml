@@ -5,7 +5,17 @@
       <text class="ip-badge">IP 识别</text>
       <text class="ip-name">{{ip.name}}{{ip.work ? ' · ' + ip.work : ''}}</text>
     </view>
-    <view class="ip-note">已优先推荐与该 IP 相关的周边、联名、收藏类礼物</view>
+    <view class="ip-note">{{rag && rag.degraded ? '已按该 IP 风格/偏好降级推荐（商品库暂无联名商品）' : '已优先推荐与该 IP 相关的周边、联名、收藏类礼物'}}</view>
+  </view>
+
+  <!-- IP 未识别提示：识别链路未产出明星/IP 时，明确告知已按画像推荐，避免用户误以为链路损坏 -->
+  <view class="card ip-miss" wx:if="{{!ip}}">
+    未识别到明确的明星 / IP 形象，本次已按收礼人画像推荐。若照片中包含明星或动漫角色，可换更清晰的正脸照重试，或补充文字线索。
+  </view>
+
+  <!-- RAG 降级提示：知识库命中但无联名商品时，说明推荐策略，避免用户误以为存在联名 -->
+  <view class="card rag-degraded" wx:if="{{rag && rag.degraded}}">
+    商品库暂无「{{rag.ipName}}」联名商品，本次已按 TA 的风格标签 / 关联品牌 / 偏好品类降级推荐；每条推荐均标注了关联点，未编造联名关系。
   </view>
 
   <!-- 收礼人画像 -->
@@ -15,7 +25,6 @@
     <view class="chips">
       <view class="chip" wx:for="{{persona.style}}" wx:key="*this">风格 · {{item}}</view>
       <view class="chip" wx:for="{{persona.interests}}" wx:key="*this">兴趣 · {{item}}</view>
-      <view class="chip warn" wx:for="{{persona.forbidden}}" wx:key="*this">避雷 · {{item}}</view>
     </view>
   </view>
 
@@ -35,23 +44,27 @@
           <text class="r-tag" wx:for="{{item.tags}}" wx:for-item="t" wx:key="*this">{{t}}</text>
         </view>
         <view class="rank-reason">推荐理由：{{item.reason}}</view>
+        <view class="rank-relation" wx:if="{{item.ipRelation}}">{{item.ipRelation}}</view>
       </view>
     </view>
 
-    <!-- 避雷榜 -->
-    <view class="avoid-trigger" bindtap="toggleAvoid">{{showAvoid ? '收起避雷榜' : '查看避雷榜'}}</view>
-    <view class="avoid-list" wx:if="{{showAvoid}}">
-      <view class="avoid-item" wx:for="{{avoid}}" wx:key="id">
-        <view class="avoid-name"><text class="avoid-icon">⚠</text>{{item.name}}</view>
-        <view class="avoid-reason">{{item.reason}}</view>
-      </view>
-    </view>
   </view>
 
   <!-- 送礼话术 -->
   <view class="card" wx:if="{{talk}}">
     <view class="title-md">送礼话术建议</view>
     <view class="talk">{{talk}}</view>
+  </view>
+
+  <!-- 不满意反馈：输入补充要求（如更便宜/换风格），携带上下文重新生成 -->
+  <view class="card">
+    <view class="title-md">不满意？告诉我补充要求</view>
+    <view class="feedback-input-wrap">
+      <textarea class="feedback-input" placeholder="例如：再便宜一点 / 换个简约风格 / 不要毛绒玩具" placeholder-class="ph" value="{{feedback}}" bindinput="onFeedbackInput" maxlength="100" />
+    </view>
+    <view class="btn-primary {{feedbackLoading ? 'disabled' : ''}}" bindtap="submitFeedback">
+      {{feedbackLoading ? (feedbackProgress ? feedbackProgress : '正在重新生成…') : '按新要求重新生成'}}
+    </view>
   </view>
 
   <view class="action">
