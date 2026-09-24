@@ -1,0 +1,9 @@
+{
+  "name": "faceSeeder",
+  "version": "1.0.0",
+  "description": "维基/Wikidata 公开头像抓取并批量注册百度人脸库（云端灌库）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "^2.6.3"
+  }
+}
