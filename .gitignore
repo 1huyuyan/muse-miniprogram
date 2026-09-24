@@ -1,5 +1,11 @@
 # ===== 敏感配置（含真实 API Key，必须排除）=====
 utils/config.local.js
+cloudfunctions/faceSearch/config.js
+scripts/register_faces.py
+
+# ===== Python 字节码缓存（可能含密钥，必须排除）=====
+__pycache__/
+*.pyc
 
 # ===== 本地开发者配置 =====
 project.private.config.json
