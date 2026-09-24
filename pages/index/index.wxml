@@ -32,6 +32,14 @@
     </view>
   </view>
 
+  <!-- 场景预设：快捷切换后影响分析 prompt 与推荐 prompt -->
+  <view class="card">
+    <view class="title-md">送给谁？（快捷场景，推荐更贴合）</view>
+    <view class="tag-wrap">
+      <view class="{{scene === item.key ? 'tag active' : 'tag'}}" wx:for="{{scenes}}" wx:key="key" data-key="{{item.key}}" bindtap="onSceneTap">{{item.label}}</view>
+    </view>
+  </view>
+
   <!-- 补充线索 -->
   <view class="card">
     <view class="title-md">2. 补充线索（可选，推荐更准）</view>
@@ -44,7 +52,7 @@
   <!-- 行动 -->
   <view class="action">
     <view class="btn-primary {{loading ? 'disabled' : ''}}" bindtap="analyze">
-      {{loading ? '正在分析...' : '开始分析推荐'}}
+      {{loading ? (progressText ? progressText : '正在分析...') : '开始分析推荐'}}
     </view>
     <view class="btn-plain link" bindtap="goSettings">接口设置</view>
   </view>
