@@ -63,4 +63,64 @@ async function combineImages(filePaths, maxSide = 900) {
   }
 }
 
-module.exports = { combineImages, getImageInfo };
+/**
+ * 压缩单张图片：目标体积 ≤1MB、最长边 ≤2000px。
+ * 先按最长边 2000 限制宽高，再迭代降 quality（80→60→40→25）直至 ≤1MB；
+ * 压缩失败或读不到大小时回退原路径（不阻断分析流程）。
+ * @param {string} filePath 本地图片路径
+ * @returns {Promise<string>} 压缩后路径（失败返回原路径）
+ */
+async function compressImage(filePath) {
+  if (!filePath) return filePath;
+  try {
+    const info = await getImageInfo(filePath).catch(() => null);
+    let compressedWidth;
+    let compressedHeight;
+    if (info && info.width && info.height) {
+      const scale = Math.min(1, 2000 / Math.max(info.width, info.height));
+      compressedWidth = Math.max(1, Math.round(info.width * scale));
+      compressedHeight = Math.max(1, Math.round(info.height * scale));
+    }
+    const qualities = [80, 60, 40, 25];
+    let lastPath = filePath;
+    for (const q of qualities) {
+      const out = await new Promise(resolve => {
+        wx.compressImage({
+          src: filePath,
+          quality: q,
+          compressedWidth,
+          compressedHeight,
+          success: r => resolve(r.tempFilePath),
+          fail: () => resolve(null)
+        });
+      });
+      if (!out) break;
+      lastPath = out;
+      const size = await new Promise(resolve => {
+        wx.getFileSystemManager().getFileInfo({
+          filePath: out,
+          success: r => resolve(r.size),
+          fail: () => resolve(0)
+        });
+      });
+      if (size > 0 && size <= 1024 * 1024) return out;
+    }
+    return lastPath;
+  } catch (e) {
+    console.error('compressImage failed', e);
+    return filePath;
+  }
+}
+
+/**
+ * 批量压缩（拍照/选图后立即调用），单项失败回退原路径。
+ * @param {string[]} filePaths
+ * @returns {Promise<string[]>} 压缩后路径数组
+ */
+async function compressImages(filePaths) {
+  const list = Array.isArray(filePaths) ? filePaths.filter(Boolean) : [];
+  if (!list.length) return list;
+  return Promise.all(list.map(p => compressImage(p)));
+}
+
+module.exports = { combineImages, getImageInfo, compressImage, compressImages };
