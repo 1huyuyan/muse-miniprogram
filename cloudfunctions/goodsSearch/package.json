@@ -1,0 +1,9 @@
+{
+  "name": "goodsSearch",
+  "version": "1.0.0",
+  "description": "礼物商品库检索云函数（全量拉取 / 关键词 / 品牌 / IP 检索）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

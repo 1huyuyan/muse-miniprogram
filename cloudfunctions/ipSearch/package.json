@@ -1,0 +1,9 @@
+{
+  "name": "ipSearch",
+  "version": "1.0.0",
+  "description": "IP 知识库检索云函数（国内外明星/动漫/游戏/潮玩）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

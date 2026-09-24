@@ -1,0 +1,7 @@
+{
+  "name": "faceSearch",
+  "version": "1.0.0",
+  "description": "百度智能云人脸识别 V3 转发云函数（搜索/注册/组管理）",
+  "main": "index.js",
+  "dependencies": {}
+}
