@@ -7,9 +7,9 @@ Page({
 
   onReady() {
     this.setData({ show: true });
-    // 等待画面停留 2.5 秒后进入首页
+    // 等待画面停留 1.25 秒后进入首页
     setTimeout(() => {
       wx.redirectTo({ url: '/pages/index/index' });
-    }, 2500);
+    }, 1250);
   }
 });
