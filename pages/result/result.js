@@ -36,6 +36,13 @@ Page({
     this.setData(data);
   },
 
+  // 商品图加载失败：隐藏图片，切换为占位块（显示商品名/编号）
+  onImgError(e) {
+    const idx = e.currentTarget.dataset.idx;
+    if (idx === undefined) return;
+    this.setData({ ['rank[' + idx + '].imgFailed']: true });
+  },
+
   goDetail(e) {
     const idx = e.currentTarget.dataset.idx;
     const item = this.data.rank[idx];
