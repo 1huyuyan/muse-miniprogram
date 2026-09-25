@@ -1,0 +1,327 @@
+// utils/goods.js - 内置商品库（MVP mock 数据，后续替换为联盟 API）
+// 每个商品带 style_tag（风格标签），供 AI 匹配与推荐
+const GOODS = [
+  { id: 'g70', name: '希思黎 Sisley 全能乳液护肤礼盒', brand: '希思黎', tags: ['美妆', '护肤', '高端', '经典'], price: '800-2000元', desc: '王俊凯任希思黎首位全球代言人，全能乳液经典口碑款', image: '/assets/goods/g70.png', kind: 'ip', ipNames: ['王俊凯', 'wang junkai', 'wangjunkai', '小凯'] },
+  { id: 'g71', name: '骆驼 CAMEL 户外冲锋衣', brand: '骆驼', tags: ['服饰', '户外', '运动', '机能'], price: '300-800元', desc: '王俊凯任骆驼CAMEL全球代言人，户外机能风冲锋衣', image: '/assets/goods/g71.png', kind: 'ip', ipNames: ['王俊凯', 'wang junkai', 'wangjunkai', '小凯'] },
+  { id: 'g72', name: '花西子 彩妆礼盒', brand: '花西子', tags: ['美妆', '彩妆', '国风', '高端'], price: '200-600元', desc: '王俊凯任花西子全球彩妆代言人，东方彩妆礼盒', image: '/assets/goods/g72.png', kind: 'ip', ipNames: ['王俊凯', 'wang junkai', 'wangjunkai', '小凯'] },
+  { id: 'g73', name: '宝曼兰朵 Pomellato 珠宝项链', brand: '宝曼兰朵', tags: ['珠宝', '饰品', '高端', '轻奢'], price: '3000-10000元', desc: '王源任宝曼兰朵Pomellato全球代言人，意大利彩色宝石珠宝', image: '/assets/goods/g73.png', kind: 'ip', ipNames: ['王源', 'wang yuan', 'wangyuan', '源源'] },
+  { id: 'g74', name: '匡威 Converse 联名帆布鞋', brand: '匡威', tags: ['运动', '球鞋', '潮流', '年轻'], price: '400-900元', desc: '王源任Converse全球代言人，经典帆布鞋联名款', image: '/assets/goods/g74.png', kind: 'ip', ipNames: ['王源', 'wang yuan', 'wangyuan', '源源'] },
+  { id: 'g75', name: '妮维雅 NIVEA 男士护肤套装', brand: '妮维雅', tags: ['美妆', '护肤', '男士', '大众'], price: '50-150元', desc: '王源任妮维雅品牌代言人，男士护肤实用款', image: '/assets/goods/g75.png', kind: 'ip', ipNames: ['王源', 'wang yuan', 'wangyuan', '源源'] },
+  { id: 'g76', name: 'FRED斐登 珠宝项链', brand: 'FRED', tags: ['珠宝', '饰品', '高端', '优雅'], price: '3000-10000元', desc: '关晓彤任FRED斐登全球代言人，法国现代珠宝', image: '/assets/goods/g76.png', kind: 'ip', ipNames: ['关晓彤', 'guan xiaotong', 'guanxiaotong'] },
+  { id: 'g77', name: '欧米茄 OMEGA 星座系列腕表', brand: '欧米茄', tags: ['腕表', '高端', '经典', '优雅'], price: '20000-50000元', desc: '关晓彤任欧米茄名人大使，星座系列经典女表', image: '/assets/goods/g77.png', kind: 'ip', ipNames: ['关晓彤', 'guan xiaotong', 'guanxiaotong'] },
+  { id: 'g78', name: '燕京啤酒 礼盒装', brand: '燕京', tags: ['饮品', '啤酒', '聚会', '大众'], price: '30-80元', desc: '关晓彤任燕京啤酒代言人，国民啤酒聚会之选', image: '/assets/goods/g78.png', kind: 'ip', ipNames: ['关晓彤', 'guan xiaotong', 'guanxiaotong'] },
+  { id: 'g79', name: '路易威登 LV 手袋/配饰礼盒', brand: '路易威登', tags: ['时尚', '手袋', '高端', '经典'], price: '3000-10000元', desc: '宋茜任路易威登品牌代言人，经典手袋配饰', image: '/assets/goods/g79.png', kind: 'ip', ipNames: ['宋茜', 'song qian', 'songqian', 'victoria'] },
+  { id: 'g80', name: '达芙妮 DAPHNE 女鞋', brand: '达芙妮', tags: ['服饰', '女鞋', '时尚', '大众'], price: '200-500元', desc: '宋茜任达芙妮DAPHNE全球代言人，都市女鞋', image: '/assets/goods/g80.png', kind: 'ip', ipNames: ['宋茜', 'song qian', 'songqian', 'victoria'] },
+  { id: 'g81', name: '宜庭 Intima 高端家纺', brand: '宜庭', tags: ['居家', '家纺', '高端', '品质'], price: '500-2000元', desc: '宋茜任宜庭Intima全球代言人，高端鹅绒被芯', image: '/assets/goods/g81.png', kind: 'ip', ipNames: ['宋茜', 'song qian', 'songqian', 'victoria'] },
+  { id: 'g82', name: '华伦天奴 VALENTINO 香水/手袋礼盒', brand: '华伦天奴', tags: ['时尚', '香水', '高端', '浪漫'], price: '1000-5000元', desc: '蔡依林任华伦天奴品牌代言人，意式高定风尚', image: '/assets/goods/g82.png', kind: 'ip', ipNames: ['蔡依林', 'cai yilin', 'caiyilin', 'jolin'] },
+  { id: 'g83', name: '魅可 M·A·C 彩妆礼盒', brand: '魅可', tags: ['美妆', '彩妆', '口红', '潮流'], price: '200-600元', desc: '蔡依林任魅可M·A·C全球代言人，经典子弹头口红', image: '/assets/goods/g83.png', kind: 'ip', ipNames: ['蔡依林', 'cai yilin', 'caiyilin', 'jolin'] },
+  { id: 'g84', name: '怡丽丝尔 ELIXIR 护肤套装', brand: '怡丽丝尔', tags: ['美妆', '护肤', '抗老', '日系'], price: '300-800元', desc: '蔡依林任怡丽丝尔ELIXIR品牌代言人，胶原蛋白护肤', image: '/assets/goods/g84.png', kind: 'ip', ipNames: ['蔡依林', 'cai yilin', 'caiyilin', 'jolin'] },
+  { id: 'g85', name: '菲拉格慕 FERRAGAMO 香水/配饰礼盒', brand: '菲拉格慕', tags: ['时尚', '香水', '高端', '优雅'], price: '1000-4000元', desc: '高圆圆任菲拉格慕品牌大使，意式优雅单品', image: '/assets/goods/g85.png', kind: 'ip', ipNames: ['高圆圆', 'gao yuanyuan', 'gaoyuanyuan'] },
+  { id: 'g86', name: '美赞臣蓝臻 奶粉礼盒', brand: '美赞臣', tags: ['母婴', '奶粉', '健康', '高端'], price: '300-500元', desc: '高圆圆任美赞臣蓝臻代言人，高端婴幼儿奶粉', image: '/assets/goods/g86.png', kind: 'ip', ipNames: ['高圆圆', 'gao yuanyuan', 'gaoyuanyuan'] },
+  { id: 'g87', name: '奈雪 茶饮联名礼盒', brand: '奈雪的茶', tags: ['饮品', '茶饮', '年轻', '甜点'], price: '50-150元', desc: '高圆圆任奈雪品牌代言人，人气茶饮周边礼盒', image: '/assets/goods/g87.png', kind: 'ip', ipNames: ['高圆圆', 'gao yuanyuan', 'gaoyuanyuan'] },
+  { id: 'g88', name: '佰草集 太极护肤套装', brand: '佰草集', tags: ['美妆', '护肤', '国货', '中高端'], price: '300-800元', desc: '刘涛任佰草集全球代言人，中草药护肤套装', image: '/assets/goods/g88.png', kind: 'ip', ipNames: ['刘涛', 'liu tao', 'liutao'] },
+  { id: 'g89', name: 'HFP 果酸精华', brand: 'HFP', tags: ['美妆', '护肤', '精华', '大众'], price: '150-350元', desc: '刘涛任HFP果酸代言人，焕肤精华人气款', image: '/assets/goods/g89.png', kind: 'ip', ipNames: ['刘涛', 'liu tao', 'liutao'] },
+  { id: 'g90', name: '椰泰 椰汁礼盒', brand: '椰泰', tags: ['饮品', '椰汁', '健康', '大众'], price: '40-90元', desc: '刘涛任椰泰品牌大使，生榨椰汁健康饮品', image: '/assets/goods/g90.png', kind: 'ip', ipNames: ['刘涛', 'liu tao', 'liutao'] },
+  { id: 'g91', name: '华伦天奴 VALENTINO 服饰/配饰礼盒', brand: '华伦天奴', tags: ['时尚', '服饰', '高端', '气场'], price: '2000-8000元', desc: '孙俪任华伦天奴品牌代言人，高定气场单品', image: '/assets/goods/g91.png', kind: 'ip', ipNames: ['孙俪', 'sun li', 'sunli'] },
+  { id: 'g92', name: '妙可蓝多 奶酪礼盒', brand: '妙可蓝多', tags: ['零食', '奶酪', '健康', '儿童'], price: '50-150元', desc: '孙俪任妙可蓝多品牌代言人，儿童奶酪棒人气款', image: '/assets/goods/g92.png', kind: 'ip', ipNames: ['孙俪', 'sun li', 'sunli'] },
+  { id: 'g93', name: '超能 洗衣凝珠', brand: '超能', tags: ['居家', '洗护', '实用', '大众'], price: '30-80元', desc: '孙俪任超能品牌代言人，天然洗护居家必备', image: '/assets/goods/g93.png', kind: 'ip', ipNames: ['孙俪', 'sun li', 'sunli'] },
+  { id: 'g94', name: '阿玛尼 Armani 香水礼盒', brand: '阿玛尼', tags: ['时尚', '香水', '高端', '经典'], price: '500-1500元', desc: '姚晨任阿玛尼品牌大使，经典香水礼盒', image: '/assets/goods/g94.png', kind: 'ip', ipNames: ['姚晨', 'yao chen', 'yaochen'] },
+  { id: 'g95', name: '希思黎 Sisley 彩妆礼盒', brand: '希思黎', tags: ['美妆', '彩妆', '高端', '精致'], price: '500-1500元', desc: '姚晨任希思黎亚太彩妆代言人，植物精粹彩妆', image: '/assets/goods/g95.png', kind: 'ip', ipNames: ['姚晨', 'yao chen', 'yaochen'] },
+  { id: 'g96', name: '汤臣倍健 营养礼盒', brand: '汤臣倍健', tags: ['健康', '营养', '保健品', '大众'], price: '100-300元', desc: '姚晨任汤臣倍健营养大使，日常营养补充', image: '/assets/goods/g96.png', kind: 'ip', ipNames: ['姚晨', 'yao chen', 'yaochen'] },
+  { id: 'g97', name: '玉兰油 OLAY 抗老护肤套装', brand: '玉兰油', tags: ['美妆', '护肤', '抗老', '大众'], price: '200-600元', desc: '袁泉任玉兰油品牌代言人，经典抗老护肤', image: '/assets/goods/g97.png', kind: 'ip', ipNames: ['袁泉', 'yuan quan', 'yuanquan'] },
+  { id: 'g98', name: 'NEXY.CO 轻奢女装', brand: 'NEXY.CO', tags: ['服饰', '女装', '轻奢', '通勤'], price: '500-2000元', desc: '袁泉任NEXY.CO品牌代言人，都市轻奢女装', image: '/assets/goods/g98.png', kind: 'ip', ipNames: ['袁泉', 'yuan quan', 'yuanquan'] },
+  { id: 'g99', name: '纯甄 酸奶礼盒', brand: '纯甄', tags: ['饮品', '酸奶', '健康', '大众'], price: '40-90元', desc: '袁泉任纯甄品牌代言人，常温酸奶经典款', image: '/assets/goods/g99.png', kind: 'ip', ipNames: ['袁泉', 'yuan quan', 'yuanquan'] },
+  { id: 'g100', name: 'Tory Burch 手袋/配饰', brand: 'Tory Burch', tags: ['时尚', '手袋', '轻奢', '通勤'], price: '2000-6000元', desc: '秦岚任Tory Burch品牌代言人，美式轻奢手袋', image: '/assets/goods/g100.png', kind: 'ip', ipNames: ['秦岚', 'qin lan', 'qinlan'] },
+  { id: 'g101', name: '莱绅通灵 Leysen 珠宝', brand: '莱绅通灵', tags: ['珠宝', '饰品', '高端', '钻石'], price: '2000-10000元', desc: '秦岚任莱绅通灵品牌代言人，比利时钻石珠宝', image: '/assets/goods/g101.png', kind: 'ip', ipNames: ['秦岚', 'qin lan', 'qinlan'] },
+  { id: 'g102', name: 'Swisse PLUS 营养品礼盒', brand: 'Swisse', tags: ['健康', '营养', '保健品', '高端'], price: '200-500元', desc: '秦岚任Swisse PLUS品牌代言人，高端营养品', image: '/assets/goods/g102.png', kind: 'ip', ipNames: ['秦岚', 'qin lan', 'qinlan'] },
+  { id: 'g103', name: 'COZY STEPS 舒适鞋', brand: 'COZY STEPS', tags: ['服饰', '女鞋', '舒适', '日常'], price: '300-800元', desc: '万茜任COZY STEPS品牌代言人，舒适通勤女鞋', image: '/assets/goods/g103.png', kind: 'ip', ipNames: ['万茜', 'wan qian', 'wanqian'] },
+  { id: 'g104', name: '艾依格 全屋定制', brand: '艾依格', tags: ['家居', '定制', '家装', '品质'], price: '5000-20000元', desc: '万茜任艾依格品牌代言人，全屋定制家居', image: '/assets/goods/g104.png', kind: 'ip', ipNames: ['万茜', 'wan qian', 'wanqian'] },
+  { id: 'g105', name: '珑骧 Longchamp 手袋', brand: '珑骧', tags: ['时尚', '手袋', '轻奢', '法式'], price: '1000-3000元', desc: '佟丽娅任珑骧中国区品牌大使，经典饺子包', image: '/assets/goods/g105.png', kind: 'ip', ipNames: ['佟丽娅', 'tong liya', 'tongliya'] },
+  { id: 'g106', name: '健达 巧克力礼盒', brand: '健达', tags: ['零食', '巧克力', '儿童', '甜蜜'], price: '30-80元', desc: '佟丽娅任健达中国区代言人，儿童巧克力人气款', image: '/assets/goods/g106.png', kind: 'ip', ipNames: ['佟丽娅', 'tong liya', 'tongliya'] },
+  { id: 'g107', name: 'ecoco 家居收纳', brand: 'ecoco', tags: ['居家', '收纳', '实用', '大众'], price: '30-100元', desc: '佟丽娅任ecoco品牌代言人，居家收纳好物', image: '/assets/goods/g107.png', kind: 'ip', ipNames: ['佟丽娅', 'tong liya', 'tongliya'] },
+  { id: 'g108', name: '波司登 羽绒服', brand: '波司登', tags: ['服饰', '羽绒服', '保暖', '国货'], price: '800-3000元', desc: '江疏影任波司登品牌大使，国民羽绒服', image: '/assets/goods/g108.png', kind: 'ip', ipNames: ['江疏影', 'jiang shuying', 'jiangshuying'] },
+  { id: 'g109', name: '梦金园 黄金首饰', brand: '梦金园', tags: ['珠宝', '黄金', '饰品', '婚庆'], price: '1000-5000元', desc: '江疏影任梦金园品牌代言人，高纯度黄金首饰', image: '/assets/goods/g109.png', kind: 'ip', ipNames: ['江疏影', 'jiang shuying', 'jiangshuying'] },
+  { id: 'g110', name: 'VERO MODA 女装', brand: 'VERO MODA', tags: ['服饰', '女装', '时尚', '通勤'], price: '300-1000元', desc: '江疏影任VERO MODA品牌代言人，都市女装', image: '/assets/goods/g110.png', kind: 'ip', ipNames: ['江疏影', 'jiang shuying', 'jiangshuying'] },
+  { id: 'g111', name: '圣罗兰 Saint Laurent 手袋/香水', brand: '圣罗兰', tags: ['时尚', '手袋', '香水', '高端'], price: '2000-8000元', desc: '宋佳任圣罗兰中国形象大使，法式前卫时尚', image: '/assets/goods/g111.png', kind: 'ip', ipNames: ['宋佳', 'song jia', 'songjia'] },
+  { id: 'g112', name: '朗姿 LANCY 高端女装', brand: '朗姿', tags: ['服饰', '女装', '高端', '知性'], price: '1000-4000元', desc: '宋佳任朗姿LANCY全球代言人，高端女装', image: '/assets/goods/g112.png', kind: 'ip', ipNames: ['宋佳', 'song jia', 'songjia'] },
+  { id: 'g113', name: '德美乐嘉 Dermalogica 护肤', brand: '德美乐嘉', tags: ['美妆', '护肤', '专业', '高端'], price: '300-800元', desc: '宋佳任德美乐嘉中国区代言人，专业院线护肤', image: '/assets/goods/g113.png', kind: 'ip', ipNames: ['宋佳', 'song jia', 'songjia'] },
+  { id: 'g114', name: '哈吉斯 HAZZYS 服饰', brand: '哈吉斯', tags: ['服饰', '穿搭', '英伦', '年轻'], price: '300-1000元', desc: '谭松韵任哈吉斯HAZZYS品牌代言人，英伦休闲服饰', image: '/assets/goods/g114.png', kind: 'ip', ipNames: ['谭松韵', 'tan songyun', 'tansongyun'] },
+  { id: 'g115', name: '颐莲 玻尿酸护肤礼盒', brand: '颐莲', tags: ['美妆', '护肤', '玻尿酸', '国货'], price: '100-300元', desc: '谭松韵任颐莲品牌代言人，玻尿酸护肤口碑款', image: '/assets/goods/g115.png', kind: 'ip', ipNames: ['谭松韵', 'tan songyun', 'tansongyun'] },
+  { id: 'g116', name: '三元 牛奶礼盒', brand: '三元', tags: ['饮品', '牛奶', '健康', '大众'], price: '40-100元', desc: '谭松韵任三元品牌代言人，高品质乳品', image: '/assets/goods/g116.png', kind: 'ip', ipNames: ['谭松韵', 'tan songyun', 'tansongyun'] },
+  { id: 'g117', name: 'AIGLE艾高 户外服饰', brand: 'AIGLE', tags: ['服饰', '户外', '法式', '品质'], price: '500-2000元', desc: '李沁任AIGLE艾高品牌大使，法式户外休闲', image: '/assets/goods/g117.png', kind: 'ip', ipNames: ['李沁', 'li qin', 'liqin'] },
+  { id: 'g118', name: '伊芙珑 EVE LOM 卸妆膏', brand: 'EVE LOM', tags: ['美妆', '护肤', '卸妆', '高端'], price: '300-800元', desc: '李沁任EVE LOM品牌大使，经典卸妆膏', image: '/assets/goods/g118.png', kind: 'ip', ipNames: ['李沁', 'li qin', 'liqin'] },
+  { id: 'g119', name: '以纯 休闲服饰', brand: '以纯', tags: ['服饰', '休闲', '年轻', '大众'], price: '100-400元', desc: '李沁任以纯品牌大使，日常休闲服饰', image: '/assets/goods/g119.png', kind: 'ip', ipNames: ['李沁', 'li qin', 'liqin'] },
+  { id: 'g120', name: '花西子 好气色护肤礼盒', brand: '花西子', tags: ['美妆', '护肤', '国风', '气色'], price: '200-500元', desc: '景甜任花西子好气色护肤大使，东方养肤彩妆', image: '/assets/goods/g120.png', kind: 'ip', ipNames: ['景甜', 'jing tian', 'jingtian'] },
+  { id: 'g121', name: 'Jimmy Choo 高跟鞋/配饰', brand: 'Jimmy Choo', tags: ['时尚', '女鞋', '高端', '奢华'], price: '3000-8000元', desc: '白鹿任Jimmy Choo亚太区代言人，奢华女鞋', image: '/assets/goods/g121.png', kind: 'ip', ipNames: ['白鹿', 'bai lu', 'bailu'] },
+  { id: 'g122', name: '安普里奥·阿玛尼 EA 服饰', brand: '安普里奥·阿玛尼', tags: ['时尚', '服饰', '高端', '现代'], price: '1000-4000元', desc: '白鹿任Emporio Armani形象代言人，现代都市服饰', image: '/assets/goods/g122.png', kind: 'ip', ipNames: ['白鹿', 'bai lu', 'bailu'] },
+  { id: 'g123', name: '卡骆驰 Crocs 洞洞鞋', brand: '卡骆驰', tags: ['服饰', '洞洞鞋', '休闲', '潮流'], price: '200-600元', desc: '白鹿任Crocs全球代言人，经典洞洞鞋', image: '/assets/goods/g123.png', kind: 'ip', ipNames: ['白鹿', 'bai lu', 'bailu'] },
+  { id: 'g124', name: '阿迪达斯三叶草 adidas Originals 服饰', brand: '阿迪达斯三叶草', tags: ['服饰', '运动', '潮流', '年轻'], price: '300-1000元', desc: '欧阳娜娜任adidas Originals品牌代言人，复古运动风', image: '/assets/goods/g124.png', kind: 'ip', ipNames: ['欧阳娜娜', 'ouyang nana', 'ouyangnana', '娜比'] },
+  { id: 'g125', name: 'WOOLMARK 羊毛服饰', brand: 'WOOLMARK', tags: ['服饰', '羊毛', '品质', '温暖'], price: '300-1000元', desc: '欧阳娜娜任WOOLMARK羊毛标志代言人，天然羊毛服饰', image: '/assets/goods/g125.png', kind: 'ip', ipNames: ['欧阳娜娜', 'ouyang nana', 'ouyangnana', '娜比'] },
+  { id: 'g126', name: '小鹏MONA 汽车', brand: '小鹏MONA', tags: ['汽车', '新能源', '科技', '年轻'], price: '110000-150000元', desc: '欧阳娜娜任小鹏MONA品牌代言人，年轻化智能纯电', image: '/assets/goods/g126.png', kind: 'ip', ipNames: ['欧阳娜娜', 'ouyang nana', 'ouyangnana', '娜比'] },
+  { id: 'g127', name: '香奈儿 CHANEL 护肤/彩妆礼盒', brand: '香奈儿', tags: ['美妆', '护肤', '彩妆', '高端'], price: '500-2000元', desc: '张子枫任香奈儿形象大使，经典护肤彩妆', image: '/assets/goods/g127.png', kind: 'ip', ipNames: ['张子枫', 'zhang zifeng', 'zhangzifeng'] },
+  { id: 'g128', name: 'SK-II 神仙水护肤礼盒', brand: 'SK-II', tags: ['美妆', '护肤', '精华', '高端'], price: '1000-2000元', desc: '张子枫任SK-II全球代言人，神仙水经典款', image: '/assets/goods/g128.png', kind: 'ip', ipNames: ['张子枫', 'zhang zifeng', 'zhangzifeng'] },
+  { id: 'g129', name: '探路者 户外服饰', brand: '探路者', tags: ['服饰', '户外', '运动', '国货'], price: '200-800元', desc: '张子枫任探路者品牌代言人，户外机能服饰', image: '/assets/goods/g129.png', kind: 'ip', ipNames: ['张子枫', 'zhang zifeng', 'zhangzifeng'] },
+  { id: 'g130', name: 'Miu Miu 手袋/服饰', brand: 'Miu Miu', tags: ['时尚', '手袋', '高端', '少女'], price: '3000-10000元', desc: '赵今麦任Miu Miu品牌大使，少女感高定', image: '/assets/goods/g130.png', kind: 'ip', ipNames: ['赵今麦', 'zhao jinmai', 'zhaojinmai'] },
+  { id: 'g131', name: '韩束 护肤礼盒', brand: '韩束', tags: ['美妆', '护肤', '国货', '抗老'], price: '200-600元', desc: '赵今麦任韩束全球代言人，红蛮腰精华', image: '/assets/goods/g131.png', kind: 'ip', ipNames: ['赵今麦', 'zhao jinmai', 'zhaojinmai'] },
+  { id: 'g132', name: '萨洛蒙 SALOMON 越野鞋', brand: '萨洛蒙', tags: ['运动', '跑鞋', '户外', '潮流'], price: '800-2000元', desc: '赵今麦任萨洛蒙SALOMON品牌代言人，越野跑鞋', image: '/assets/goods/g132.png', kind: 'ip', ipNames: ['赵今麦', 'zhao jinmai', 'zhaojinmai'] },
+  { id: 'g133', name: '迪奥 Dior 手袋礼盒', brand: '迪奥', tags: ['时尚', '手袋', '高端', '优雅'], price: '3000-10000元', desc: '周也任迪奥品牌大使，优雅手袋', image: '/assets/goods/g133.png', kind: 'ip', ipNames: ['周也', 'zhou ye', 'zhouye'] },
+  { id: 'g134', name: '巴黎欧莱雅 彩妆礼盒', brand: '巴黎欧莱雅', tags: ['美妆', '彩妆', '大众', '年轻'], price: '150-400元', desc: '周也任巴黎欧莱雅彩妆代言人，人气彩妆', image: '/assets/goods/g134.png', kind: 'ip', ipNames: ['周也', 'zhou ye', 'zhouye'] },
+  { id: 'g135', name: '塔思琦 TASAKI 珍珠珠宝', brand: 'TASAKI', tags: ['珠宝', '珍珠', '饰品', '高端'], price: '3000-15000元', desc: '周也任TASAKI中国区品牌大使，珍珠珠宝', image: '/assets/goods/g135.png', kind: 'ip', ipNames: ['周也', 'zhou ye', 'zhouye'] },
+  { id: 'g136', name: '周六福 黄金珠宝', brand: '周六福', tags: ['珠宝', '黄金', '饰品', '婚庆'], price: '1000-5000元', desc: '王楚然任周六福全球灵感代言人，国民黄金珠宝', image: '/assets/goods/g136.png', kind: 'ip', ipNames: ['王楚然', 'wang churan', 'wangchuran'] },
+  { id: 'g137', name: '朗姿 LANCY FROM 25 女装', brand: 'LANCY FROM 25', tags: ['服饰', '女装', '高端', '知性'], price: '1000-4000元', desc: '王楚然任LANCY FROM 25全球代言人，高端女装', image: '/assets/goods/g137.png', kind: 'ip', ipNames: ['王楚然', 'wang churan', 'wangchuran'] },
+  { id: 'g138', name: '毛戈平 美妆礼盒', brand: '毛戈平', tags: ['美妆', '彩妆', '国货', '高端'], price: '300-1000元', desc: '王楚然任毛戈平品牌大使，光影美妆', image: '/assets/goods/g138.png', kind: 'ip', ipNames: ['王楚然', 'wang churan', 'wangchuran'] },
+  { id: 'g139', name: '古驰 Gucci 手袋/配饰礼盒', brand: '古驰', tags: ['时尚', '手袋', '高端', '甜美'], price: '3000-10000元', desc: '田曦薇任古驰品牌大使，甜美风手袋配饰', image: '/assets/goods/g139.png', kind: 'ip', ipNames: ['田曦薇', 'tian xiwei', 'tianxiwei'] },
+  { id: 'g140', name: '沪上阿姨 茶饮礼盒', brand: '沪上阿姨', tags: ['饮品', '茶饮', '年轻', '平价'], price: '20-60元', desc: '田曦薇任沪上阿姨全球代言人，人气果茶', image: '/assets/goods/g140.png', kind: 'ip', ipNames: ['田曦薇', 'tian xiwei', 'tianxiwei'] },
+  { id: 'g141', name: '极狐 ARCFOX 汽车', brand: '极狐', tags: ['汽车', '新能源', '科技', '高端'], price: '180000-300000元', desc: '田曦薇任极狐汽车全球代言人，智能纯电', image: '/assets/goods/g141.png', kind: 'ip', ipNames: ['田曦薇', 'tian xiwei', 'tianxiwei'] },
+  { id: 'g142', name: '纪梵希 Givenchy 彩妆/香水', brand: '纪梵希', tags: ['美妆', '彩妆', '香水', '高端'], price: '300-1000元', desc: '章若楠任纪梵希品牌大使，法式高定美妆', image: '/assets/goods/g142.png', kind: 'ip', ipNames: ['章若楠', 'zhang ruonan', 'zhangruonan'] },
+  { id: 'g143', name: '真维斯 牛仔服饰', brand: '真维斯', tags: ['服饰', '牛仔', '休闲', '大众'], price: '100-300元', desc: '章若楠任真维斯全球代言人，经典牛仔', image: '/assets/goods/g143.png', kind: 'ip', ipNames: ['章若楠', 'zhang ruonan', 'zhangruonan'] },
+  { id: 'g144', name: '百丽 BELLE 女鞋', brand: '百丽', tags: ['服饰', '女鞋', '时尚', '大众'], price: '300-800元', desc: '章若楠任百丽品牌代言人，舒适时尚女鞋', image: '/assets/goods/g144.png', kind: 'ip', ipNames: ['章若楠', 'zhang ruonan', 'zhangruonan'] },
+  { id: 'g145', name: '博柏利 Burberry 大衣/香水礼盒', brand: 'Burberry', tags: ['时尚', '服饰', '香水', '高端'], price: '2000-8000元', desc: '张婧仪任Burberry品牌大使，英伦大衣香水', image: '/assets/goods/g145.png', kind: 'ip', ipNames: ['张婧仪', 'zhang jingyi', 'zhangjingyi'] },
+  { id: 'g146', name: '卡地亚 Cartier 珠宝腕表', brand: '卡地亚', tags: ['珠宝', '腕表', '高端', '经典'], price: '10000-50000元', desc: '张婧仪任卡地亚品牌大使，经典珠宝腕表', image: '/assets/goods/g146.png', kind: 'ip', ipNames: ['张婧仪', 'zhang jingyi', 'zhangjingyi'] },
+  { id: 'g147', name: '韶音 Shokz 骨传导耳机', brand: '韶音', tags: ['数码', '耳机', '运动', '科技'], price: '800-2000元', desc: '张婧仪任韶音全球品牌大使，骨传导运动耳机', image: '/assets/goods/g147.png', kind: 'ip', ipNames: ['张婧仪', 'zhang jingyi', 'zhangjingyi'] },
+  { id: 'g148', name: '伊丽莎白雅顿 护肤礼盒', brand: '伊丽莎白雅顿', tags: ['美妆', '护肤', '抗老', '经典'], price: '300-1000元', desc: '张新成任伊丽莎白雅顿品牌代言人，金胶精华', image: '/assets/goods/g148.png', kind: 'ip', ipNames: ['张新成', 'zhang xincheng', 'zhangxincheng'] },
+  { id: 'g149', name: 'navigare 航海服饰', brand: 'navigare', tags: ['服饰', '休闲', '航海', '意式'], price: '300-1000元', desc: '张新成任navigare品牌代言人，意大利航海风服饰', image: '/assets/goods/g149.png', kind: 'ip', ipNames: ['张新成', 'zhang xincheng', 'zhangxincheng'] },
+  { id: 'g150', name: '馥绿德雅 洗护礼盒', brand: '馥绿德雅', tags: ['美妆', '洗护', '防脱', '高端'], price: '200-500元', desc: '张新成任馥绿德雅品牌代言人，防脱洗护', image: '/assets/goods/g150.png', kind: 'ip', ipNames: ['张新成', 'zhang xincheng', 'zhangxincheng'] },
+  { id: 'g151', name: '尊尼获加蓝牌 威士忌', brand: '尊尼获加', tags: ['酒类', '威士忌', '高端', '商务'], price: '1000-2000元', desc: '张晚意任尊尼获加蓝牌中国区代言人，高端调配威士忌', image: '/assets/goods/g151.png', kind: 'ip', ipNames: ['张晚意', 'zhang wanyi', 'zhangwanyi'] },
+  { id: 'g152', name: '伊利巧乐兹 冰淇淋', brand: '伊利', tags: ['零食', '冰淇淋', '甜点', '大众'], price: '10-40元', desc: '张晚意任伊利巧乐兹品牌代言人，经典脆筒冰淇淋', image: '/assets/goods/g152.png', kind: 'ip', ipNames: ['张晚意', 'zhang wanyi', 'zhangwanyi'] },
+  { id: 'g153', name: '诺珮诗焕光 护肤', brand: '诺珮诗焕光', tags: ['美妆', '护肤', '焕亮', '高端'], price: '300-800元', desc: '张晚意任诺珮诗焕光品牌代言人，焕光护肤', image: '/assets/goods/g153.png', kind: 'ip', ipNames: ['张晚意', 'zhang wanyi', 'zhangwanyi'] },
+  { id: 'g154', name: '迪奥 Dior 美妆礼盒', brand: '迪奥', tags: ['美妆', '彩妆', '高端', '男士'], price: '300-1000元', desc: '邓为任迪奥全球美妆大使，Dior美妆经典款', image: '/assets/goods/g154.png', kind: 'ip', ipNames: ['邓为', 'deng wei', 'dengwei'] },
+  { id: 'g155', name: '薇诺娜 敏感肌护肤', brand: '薇诺娜', tags: ['美妆', '护肤', '敏感肌', '国货'], price: '150-400元', desc: '邓为任薇诺娜亚太区代言人，敏感肌修护', image: '/assets/goods/g155.png', kind: 'ip', ipNames: ['邓为', 'deng wei', 'dengwei'] },
+  { id: 'g156', name: '摇滚动物园 洗护礼盒', brand: '摇滚动物园', tags: ['美妆', '洗护', '年轻', '香氛'], price: '50-150元', desc: '邓为任摇滚动物园全球代言人，香氛洗护', image: '/assets/goods/g156.png', kind: 'ip', ipNames: ['邓为', 'deng wei', 'dengwei'] },
+  { id: 'g157', name: '圣罗兰 Saint Laurent 香水/皮具', brand: '圣罗兰', tags: ['时尚', '香水', '皮具', '高端'], price: '1000-4000元', desc: '陈哲远任圣罗兰中国形象大使，法式时尚单品', image: '/assets/goods/g157.png', kind: 'ip', ipNames: ['陈哲远', 'chen zheyuan', 'chenzheyuan'] },
+  { id: 'g158', name: '珊珂 SENKA 洁面护肤', brand: '珊珂', tags: ['美妆', '护肤', '洁面', '日系'], price: '30-80元', desc: '陈哲远任珊珂SENKA亚太区代言人，人气洗面奶', image: '/assets/goods/g158.png', kind: 'ip', ipNames: ['陈哲远', 'chen zheyuan', 'chenzheyuan'] },
+  { id: 'g159', name: '小老板 TaoKaeNoi 海苔礼盒', brand: 'TaoKaeNoi', tags: ['零食', '海苔', '零食礼盒', '大众'], price: '30-80元', desc: '陈哲远任TaoKaeNoi全球代言人，泰式海苔零食', image: '/assets/goods/g159.png', kind: 'ip', ipNames: ['陈哲远', 'chen zheyuan', 'chenzheyuan'] },
+  { id: 'g160', name: '万宝龙 Montblanc 皮具/书写工具', brand: '万宝龙', tags: ['时尚', '皮具', '书写', '高端'], price: '1000-5000元', desc: '王安宇任万宝龙品牌大使，德式经典皮具', image: '/assets/goods/g160.png', kind: 'ip', ipNames: ['王安宇', 'wang anyu', 'wanganyu'] },
+  { id: 'g161', name: 'FILA 潮流运动服饰', brand: 'FILA', tags: ['服饰', '运动', '潮流', '年轻'], price: '300-1000元', desc: '王安宇任FILA品牌代言人，潮流运动风', image: '/assets/goods/g161.png', kind: 'ip', ipNames: ['王安宇', 'wang anyu', 'wanganyu'] },
+  { id: 'g162', name: '火星人 集成灶', brand: '火星人', tags: ['家电', '厨房', '集成灶', '高端'], price: '5000-15000元', desc: '王安宇任火星人全球代言人，高端集成灶', image: '/assets/goods/g162.png', kind: 'ip', ipNames: ['王安宇', 'wang anyu', 'wanganyu'] },
+  { id: 'g163', name: 'Off&Relax 洗护礼盒', brand: 'Off&Relax', tags: ['美妆', '洗护', '温泉', '日系'], price: '80-200元', desc: '林一任Off&Relax首位品牌大使，温泉洗护', image: '/assets/goods/g163.png', kind: 'ip', ipNames: ['林一', 'lin yi', 'linyi'] },
+  { id: 'g164', name: '霸王茶姬 抹茶系列礼盒', brand: '霸王茶姬', tags: ['饮品', '茶饮', '国风', '年轻'], price: '30-80元', desc: '林一任霸王茶姬抹茶系列代言人，人气原叶鲜奶茶', image: '/assets/goods/g164.png', kind: 'ip', ipNames: ['林一', 'lin yi', 'linyi'] },
+  { id: 'g165', name: '老庙黄金 古韵金系列', brand: '老庙黄金', tags: ['珠宝', '黄金', '饰品', '国风'], price: '1000-5000元', desc: '郭麒麟任老庙黄金品牌双代言人之一（与王楚然共同），古韵金系列', image: '/assets/goods/g165.png', kind: 'ip', ipNames: ['郭麒麟', 'guo qilin', 'guoqilin', '大林子'] },
+  { id: 'g166', name: '菲拉格慕 FERRAGAMO 鞋履/皮具', brand: '菲拉格慕', tags: ['时尚', '鞋履', '皮具', '高端'], price: '2000-6000元', desc: '黄景瑜任菲拉格慕全球品牌代言人，意式鞋履皮具', image: '/assets/goods/g166.png', kind: 'ip', ipNames: ['黄景瑜', 'huang jingyu', 'huangjingyu'] },
+  { id: 'g167', name: '探路者 户外装备', brand: '探路者', tags: ['户外', '装备', '运动', '国货'], price: '300-1000元', desc: '黄景瑜任探路者全球品牌代言人，专业户外装备', image: '/assets/goods/g167.png', kind: 'ip', ipNames: ['黄景瑜', 'huang jingyu', 'huangjingyu'] },
+  { id: 'g168', name: '启境 AISTALAND 汽车', brand: '启境', tags: ['汽车', '新能源', '科技', '高端'], price: '150000-300000元', desc: '黄景瑜任启境汽车全球品牌代言人，智能出行', image: '/assets/goods/g168.png', kind: 'ip', ipNames: ['黄景瑜', 'huang jingyu', 'huangjingyu'] },
+  { id: 'g169', name: 'B&O 铂傲 音响耳机', brand: 'B&O', tags: ['数码', '音响', '耳机', '高端'], price: '2000-8000元', desc: '龚俊任Bang & Olufsen全球品牌大使，北欧声学设计', image: '/assets/goods/g169.png', kind: 'ip', ipNames: ['龚俊', 'gong jun', 'gongjun'] },
+  { id: 'g170', name: '中乔体育 运动装备', brand: '中乔体育', tags: ['运动', '球鞋', '装备', '国货'], price: '200-800元', desc: '龚俊任中乔体育全球代言人，专业运动装备', image: '/assets/goods/g170.png', kind: 'ip', ipNames: ['龚俊', 'gong jun', 'gongjun'] },
+  { id: 'g171', name: '达霏欣 洗护发礼盒', brand: '达霏欣', tags: ['美妆', '洗护', '防脱', '健康'], price: '100-300元', desc: '龚俊任达霏欣全球品牌代言人，头皮洗护', image: '/assets/goods/g171.png', kind: 'ip', ipNames: ['龚俊', 'gong jun', 'gongjun'] },
+  { id: 'g172', name: 'GAP 盖璞 休闲服饰', brand: 'GAP', tags: ['服饰', '休闲', '美式', '百搭'], price: '200-800元', desc: '成毅任GAP亚洲区品牌代言人，美式休闲服饰', image: '/assets/goods/g172.png', kind: 'ip', ipNames: ['成毅', 'cheng yi', 'chengyi'] },
+  { id: 'g173', name: '宝洁 身体洗护礼盒', brand: '宝洁', tags: ['美妆', '洗护', '大众', '健康'], price: '50-150元', desc: '成毅任宝洁身体洗护集团级代言人，宝洁近两百年首位身体洗护品类代言人', image: '/assets/goods/g173.png', kind: 'ip', ipNames: ['成毅', 'cheng yi', 'chengyi'] },
+  { id: 'g174', name: '联合利华 美护发礼盒', brand: '联合利华', tags: ['美妆', '洗护', '大众', '健康'], price: '50-150元', desc: '成毅任联合利华美护发集团级代言人，内娱首位集团title', image: '/assets/goods/g174.png', kind: 'ip', ipNames: ['成毅', 'cheng yi', 'chengyi'] },
+  { id: 'g175', name: '周大生 黄金珠宝', brand: '周大生', tags: ['珠宝', '黄金', '饰品', '婚庆'], price: '1000-5000元', desc: '任嘉伦任周大生全球品牌代言人，国民珠宝品牌', image: '/assets/goods/g175.png', kind: 'ip', ipNames: ['任嘉伦', 'ren jialun', 'renjialun'] },
+  { id: 'g176', name: '美度 MIDO 舵手系列腕表', brand: '美度', tags: ['腕表', '瑞士', '高端', '经典'], price: '5000-12000元', desc: '任嘉伦任瑞士美度表全球品牌代言人，舵手系列', image: '/assets/goods/g176.png', kind: 'ip', ipNames: ['任嘉伦', 'ren jialun', 'renjialun'] },
+  { id: 'g177', name: '崂山 矿泉水礼盒', brand: '崂山', tags: ['饮品', '矿泉水', '健康', '百年品牌'], price: '30-80元', desc: '任嘉伦任崂山品牌代言人，崂山创立百年首位代言人', image: '/assets/goods/g177.png', kind: 'ip', ipNames: ['任嘉伦', 'ren jialun', 'renjialun'] },
+  { id: 'g178', name: 'Forevermark 永恒印记 钻石', brand: 'Forevermark', tags: ['珠宝', '钻石', '饰品', '高端'], price: '5000-30000元', desc: '罗云熙任Forevermark亚太区臻雅代言人，永恒印记钻石', image: '/assets/goods/g178.png', kind: 'ip', ipNames: ['罗云熙', 'luo yunxi', 'luoyunxi'] },
+  { id: 'g179', name: '蒂花之秀 洗护礼盒', brand: '蒂花之秀', tags: ['美妆', '洗护', '大众', '经典'], price: '30-80元', desc: '罗云熙任蒂花之秀全球代言人，经典洗护', image: '/assets/goods/g179.png', kind: 'ip', ipNames: ['罗云熙', 'luo yunxi', 'luoyunxi'] },
+  { id: 'g180', name: '三式 SANSHI 护肤', brand: '三式', tags: ['美妆', '护肤', '国货', '高端'], price: '200-600元', desc: '罗云熙任三式SANSHI首位全球品牌代言人，功效护肤', image: '/assets/goods/g180.png', kind: 'ip', ipNames: ['罗云熙', 'luo yunxi', 'luoyunxi'] },
+  { id: 'g181', name: '尚美巴黎 Chaumet 珠宝', brand: '尚美巴黎', tags: ['珠宝', '饰品', '高端', '法式'], price: '10000-50000元', desc: '车银优任Chaumet尚美巴黎品牌大使，法国顶级珠宝', image: '/assets/goods/g181.png', kind: 'ip', ipNames: ['车银优', 'cha eunwoo', 'chaeunwoo', '银优'] },
+  { id: 'g182', name: 'Calvin Klein 服饰/香水', brand: 'Calvin Klein', tags: ['服饰', '香水', '时尚', '年轻'], price: '300-1000元', desc: '车银优任Calvin Klein品牌代言人，摩登基础款', image: '/assets/goods/g182.png', kind: 'ip', ipNames: ['车银优', 'cha eunwoo', 'chaeunwoo', '银优'] },
+  { id: 'g183', name: '斯凯奇 SKECHERS 运动鞋', brand: '斯凯奇', tags: ['运动', '休闲', '舒适', '日常'], price: '400-800元', desc: '车银优任斯凯奇亚太区品牌大使，舒适运动鞋', image: '/assets/goods/g183.png', kind: 'ip', ipNames: ['车银优', 'cha eunwoo', 'chaeunwoo', '银优'] },
+  { id: 'g184', name: '思琳 CELINE 手袋/服饰', brand: 'CELINE', tags: ['时尚', '手袋', '高端', '法式'], price: '5000-15000元', desc: '朴宝剑任CELINE全球品牌大使，品牌首位全球品牌大使', image: '/assets/goods/g184.png', kind: 'ip', ipNames: ['朴宝剑', 'park bogum', 'parkbogum', '宝剑'] },
+  { id: 'g185', name: '欧米茄 OMEGA 海马系列腕表', brand: '欧米茄', tags: ['腕表', '高端', '经典', '男士'], price: '20000-50000元', desc: '朴宝剑任欧米茄品牌代言人，海马系列', image: '/assets/goods/g185.png', kind: 'ip', ipNames: ['朴宝剑', 'park bogum', 'parkbogum', '宝剑'] },
+  { id: 'g186', name: '欧米茄 OMEGA 超霸系列腕表', brand: '欧米茄', tags: ['腕表', '高端', '经典', '男士'], price: '20000-50000元', desc: '玄彬任欧米茄全球品牌代言人，超霸系列', image: '/assets/goods/g186.png', kind: 'ip', ipNames: ['玄彬', 'hyun bin', 'hyunbin', '炫彬'] },
+  { id: 'g187', name: '诺悠翩雅 Loro Piana 羊绒服饰', brand: '诺悠翩雅', tags: ['服饰', '羊绒', '高端', '质感'], price: '5000-20000元', desc: '玄彬任Loro Piana形象大使，顶级羊绒', image: '/assets/goods/g187.png', kind: 'ip', ipNames: ['玄彬', 'hyun bin', 'hyunbin', '炫彬'] },
+  { id: 'g188', name: '华伦天奴 VALENTINO 女装/手袋', brand: '华伦天奴', tags: ['时尚', '女装', '手袋', '高端'], price: '3000-10000元', desc: '孙艺珍任华伦天奴品牌大使，优雅女装手袋', image: '/assets/goods/g188.png', kind: 'ip', ipNames: ['孙艺珍', 'son yejin', 'sonyejin', '艺珍'] },
+  { id: 'g189', name: 'PIRETTI 高尔夫服饰', brand: 'PIRETTI', tags: ['服饰', '高尔夫', '运动', '高端'], price: '1000-3000元', desc: '孙艺珍任PIRETTI品牌代言人，高尔夫运动服饰', image: '/assets/goods/g189.png', kind: 'ip', ipNames: ['孙艺珍', 'son yejin', 'sonyejin', '艺珍'] },
+  { id: 'g190', name: '露露乐蒙 lululemon 运动服饰', brand: 'lululemon', tags: ['服饰', '运动', '瑜伽', '高端'], price: '400-1500元', desc: '朴叙俊任lululemon品牌大使，运动生活方式', image: '/assets/goods/g190.png', kind: 'ip', ipNames: ['朴叙俊', 'park seojoon', 'parkseojoon', '叙俊'] },
+  { id: 'g191', name: 'BOSS 雨果博斯 男装', brand: 'BOSS', tags: ['时尚', '男装', '高端', '商务'], price: '2000-8000元', desc: '李敏镐任BOSS全球品牌代言人，德式商务男装', image: '/assets/goods/g191.png', kind: 'ip', ipNames: ['李敏镐', 'lee minho', 'leeminho', '敏镐'] },
+  { id: 'g192', name: 'FENDI 芬迪 男装/手袋', brand: 'FENDI', tags: ['时尚', '男装', '手袋', '高端'], price: '3000-12000元', desc: '李敏镐任FENDI品牌代言人，意式奢华', image: '/assets/goods/g192.png', kind: 'ip', ipNames: ['李敏镐', 'lee minho', 'leeminho', '敏镐'] },
+  { id: 'g193', name: '普拉达 PRADA 手袋/皮具', brand: '普拉达', tags: ['时尚', '手袋', '皮具', '高端'], price: '3000-15000元', desc: '金秀贤任普拉达品牌大使，意式极简时尚', image: '/assets/goods/g193.png', kind: 'ip', ipNames: ['金秀贤', 'kim soohyun', 'kimsoohyun', '秀贤'] },
+  { id: 'g194', name: '祖·玛珑 Jo Malone 香水礼盒', brand: '祖·玛珑', tags: ['美妆', '香水', '高端', '沙龙'], price: '500-1500元', desc: '金秀贤任祖·玛珑亚太区品牌大使，品牌首位韩籍演员大使', image: '/assets/goods/g194.png', kind: 'ip', ipNames: ['金秀贤', 'kim soohyun', 'kimsoohyun', '秀贤'] },
+  { id: 'g195', name: '路易威登 LV 香水/皮具礼盒', brand: '路易威登', tags: ['时尚', '香水', '皮具', '高端'], price: '2000-8000元', desc: '宋仲基任路易威登全球品牌大使，经典旅行皮具', image: '/assets/goods/g195.png', kind: 'ip', ipNames: ['宋仲基', 'song joongki', 'songjoongki', '仲基'] },
+  { id: 'g196', name: '美度 MIDO 领航者系列腕表', brand: '美度', tags: ['腕表', '瑞士', '高端', '潜水'], price: '5000-12000元', desc: '李钟硕任瑞士美度表品牌代言人，领航者系列', image: '/assets/goods/g196.png', kind: 'ip', ipNames: ['李钟硕', 'lee jongsuk', 'leejongsuk', '钟硕'] },
+  { id: 'g197', name: '苏秘37° SU:M37 高端护肤', brand: '苏秘37°', tags: ['美妆', '护肤', '韩妆', '高端'], price: '500-1500元', desc: '李钟硕任苏秘37°品牌代言人，自然发酵护肤', image: '/assets/goods/g197.png', kind: 'ip', ipNames: ['李钟硕', 'lee jongsuk', 'leejongsuk', '钟硕'] },
+  { id: 'g198', name: '雷达 RADO 真我系列腕表', brand: '雷达', tags: ['腕表', '瑞士', '高端', '设计'], price: '10000-30000元', desc: '池昌旭任雷达表全球品牌代言人，真我方形系列联名限量款', image: '/assets/goods/g198.png', kind: 'ip', ipNames: ['池昌旭', 'ji changwook', 'jichangwook', '昌旭'] },
+  { id: 'g199', name: 'Bello.U 护肤', brand: 'Bello.U', tags: ['美妆', '护肤', '韩妆', '温和'], price: '100-300元', desc: '池昌旭任Bello.U品牌代言人，连续两年担任', image: '/assets/goods/g199.png', kind: 'ip', ipNames: ['池昌旭', 'ji changwook', 'jichangwook', '昌旭'] },
+  { id: 'g200', name: '杜嘉班纳 Dolce & Gabbana 服饰', brand: '杜嘉班纳', tags: ['时尚', '服饰', '高端', '意式'], price: '3000-12000元', desc: '丁海寅任杜嘉班纳全球品牌大使，西西里风情', image: '/assets/goods/g200.png', kind: 'ip', ipNames: ['丁海寅', 'jung haein', 'junghaein', '海寅'] },
+  { id: 'g201', name: 'TOMMY HILFIGER 服饰', brand: 'TOMMY HILFIGER', tags: ['服饰', '休闲', '美式', '年轻'], price: '300-1000元', desc: '丁海寅任TOMMY HILFIGER全球家族成员，美式休闲', image: '/assets/goods/g201.png', kind: 'ip', ipNames: ['丁海寅', 'jung haein', 'junghaein', '海寅'] },
+  { id: 'g202', name: '路易威登 LV 腕表/皮具礼盒', brand: '路易威登', tags: ['时尚', '腕表', '皮具', '高端'], price: '3000-10000元', desc: '孔刘任路易威登品牌大使，经典皮具腕表', image: '/assets/goods/g202.png', kind: 'ip', ipNames: ['孔刘', 'gong yoo', 'gongyoo', '孔侑'] },
+  { id: 'g203', name: 'TOM FORD 美妆礼盒', brand: 'TOM FORD', tags: ['美妆', '彩妆', '高端', '奢华'], price: '500-2000元', desc: '孔刘任TOM FORD美妆亚太区大使，奢华彩妆', image: '/assets/goods/g203.png', kind: 'ip', ipNames: ['孔刘', 'gong yoo', 'gongyoo', '孔侑'] },
+  { id: 'g204', name: '古驰 GUCCI 男装/旅行系列', brand: '古驰', tags: ['时尚', '男装', '旅行', '高端'], price: '3000-12000元', desc: '李政宰任古驰全球品牌大使，Valigeria旅行系列', image: '/assets/goods/g204.png', kind: 'ip', ipNames: ['李政宰', 'lee jungjae', 'leejungjae', '政宰'] },
+  { id: 'g205', name: 'Bithumb 加密资产平台', brand: 'Bithumb', tags: ['金融', '科技', '数字资产', '新潮'], price: '100-10000元', desc: '郑雨盛任Bithumb广告代言人（2025年经纪公司官方确认）', image: '/assets/goods/g205.png', kind: 'ip', ipNames: ['郑雨盛', 'jung woosung', 'jungwoosung', '雨盛'] },
+  { id: 'g206', name: '速卖通 AliExpress 韩国站', brand: 'AliExpress', tags: ['电商', '购物', '全球', '实惠'], price: '50-2000元', desc: '马东锡任速卖通韩国站代言人，连续三年担任（2023-2025）', image: '/assets/goods/g206.png', kind: 'ip', ipNames: ['马东锡', 'ma dongseok', 'madongseok', '东锡'] },
+  { id: 'g207', name: '庆东纳碧安 KDNAVIEN 家电', brand: '庆东纳碧安', tags: ['家电', '热水器', '地暖', '品质'], price: '3000-10000元', desc: '马东锡任庆东纳碧安品牌代言人，冷凝热水器', image: '/assets/goods/g207.png', kind: 'ip', ipNames: ['马东锡', 'ma dongseok', 'madongseok', '东锡'] },
+  { id: 'g208', name: '积家 Jaeger-LeCoultre 腕表', brand: '积家', tags: ['腕表', '高端', '经典', '机械'], price: '30000-100000元', desc: '金宇彬任积家全球品牌大使，瑞士高级制表', image: '/assets/goods/g208.png', kind: 'ip', ipNames: ['金宇彬', 'kim woobin', 'kimwoobin', '宇彬'] },
+  { id: 'g209', name: '祖·玛珑 Jo Malone 香氛礼盒', brand: '祖·玛珑', tags: ['美妆', '香水', '高端', '沙龙'], price: '500-1500元', desc: '金宇彬任祖·玛珑亚太区品牌大使，经典香氛', image: '/assets/goods/g209.png', kind: 'ip', ipNames: ['金宇彬', 'kim woobin', 'kimwoobin', '宇彬'] },
+  { id: 'g210', name: 'K·SWISS 运动鞋', brand: 'K·SWISS', tags: ['运动', '球鞋', '休闲', '经典'], price: '300-800元', desc: '金宇彬任K·SWISS品牌形象大使，经典网球鞋', image: '/assets/goods/g210.png', kind: 'ip', ipNames: ['金宇彬', 'kim woobin', 'kimwoobin', '宇彬'] },
+  { id: 'g211', name: '艾美表 Maurice Lacroix 腕表', brand: '艾美表', tags: ['腕表', '瑞士', '高端', '机械'], price: '10000-30000元', desc: '张东健任艾美表品牌大使（2024年官宣，拓展亚洲市场）', image: '/assets/goods/g211.png', kind: 'ip', ipNames: ['张东健', 'jang donggun', 'jangdonggun', '东健'] },
+  { id: 'g212', name: 'OLZEN 服饰', brand: 'OLZEN', tags: ['服饰', '休闲', '韩风', '品质'], price: '300-1000元', desc: '元斌任OLZEN服饰品牌代言人，已合作三年', image: '/assets/goods/g212.png', kind: 'ip', ipNames: ['元斌', 'won bin', 'wonbin', '元彬'] },
+  { id: 'g213', name: 'Shabu20 火锅套餐券', brand: 'Shabu20', tags: ['餐饮', '火锅', '美食', '聚会'], price: '100-300元', desc: '元斌任Shabu20品牌代言人（2025年官方公布）', image: '/assets/goods/g213.png', kind: 'ip', ipNames: ['元斌', 'won bin', 'wonbin', '元彬'] },
+  { id: 'g214', name: '尊尼获加 Johnnie Walker 威士忌', brand: '尊尼获加', tags: ['酒类', '威士忌', '高端', '经典'], price: '200-1000元', desc: '赵寅成任尊尼获加品牌大使（帝亚吉欧韩国2024年官宣）', image: '/assets/goods/g214.png', kind: 'ip', ipNames: ['赵寅成', 'jo insung', 'joinsung', '寅成'] },
+  { id: 'g215', name: 'K2 户外服饰', brand: 'K2', tags: ['服饰', '户外', '运动', '韩系'], price: '500-2000元', desc: '赵寅成任K2品牌代言人，户外品牌新面孔', image: '/assets/goods/g215.png', kind: 'ip', ipNames: ['赵寅成', 'jo insung', 'joinsung', '寅成'] },
+  { id: 'g216', name: '北面 The North Face 户外服饰', brand: '北面', tags: ['服饰', '户外', '运动', '经典'], price: '500-2000元', desc: '苏志燮任韩国北面品牌代言人，多年合作', image: '/assets/goods/g216.png', kind: 'ip', ipNames: ['苏志燮', 'so jisub', 'sojisub', '志燮'] },
+  { id: 'g217', name: '新秀丽 Samsonite 箱包', brand: '新秀丽', tags: ['箱包', '旅行', '商务', '耐用'], price: '500-2000元', desc: '苏志燮任新秀丽品牌代言人，旅行箱包', image: '/assets/goods/g217.png', kind: 'ip', ipNames: ['苏志燮', 'so jisub', 'sojisub', '志燮'] },
+  { id: 'g218', name: '奥迪 Audi A6 汽车', brand: '奥迪', tags: ['汽车', '豪华', '商务', '科技'], price: '400000-600000元', desc: '李秉宪任奥迪韩国新奥迪A6品牌宣传大使（2026年5月）', image: '/assets/goods/g218.png', kind: 'ip', ipNames: ['李秉宪', 'lee byunghun', 'leebyunghun', '秉宪'] },
+  { id: 'g219', name: 'XERF 赛诺秀路创丽 美容仪', brand: 'XERF', tags: ['美妆', '美容仪', '科技', '高端'], price: '5000-15000元', desc: '朴信惠任XERF品牌代言人/大使，覆盖亚太11国', image: '/assets/goods/g219.png', kind: 'ip', ipNames: ['朴信惠', 'park shinhye', 'parkshinhye', '信惠'] },
+  { id: 'g220', name: 'ONE BOY 机能服饰', brand: 'ONE BOY', tags: ['服饰', '机能', '冰锋', '台湾'], price: '300-1000元', desc: '朴敏英任ONE BOY夏季代言人（2022年首邀，2024年续任）', image: '/assets/goods/g220.png', kind: 'ip', ipNames: ['朴敏英', 'park minyoung', 'parkminyoung', '敏英'] },
+  { id: 'g221', name: '香奈儿 CHANEL 手袋/珠宝礼盒', brand: '香奈儿', tags: ['时尚', '手袋', '珠宝', '高端'], price: '3000-15000元', desc: '金高银任香奈儿品牌大使，经典手袋珠宝', image: '/assets/goods/g221.png', kind: 'ip', ipNames: ['金高银', 'kim goeun', 'kimgoeun', '高银'] },
+  { id: 'g222', name: '奈斯派索 Nespresso 咖啡机', brand: 'Nespresso', tags: ['家电', '咖啡', '高端', '品质'], price: '1000-4000元', desc: '金高银任Nespresso亚洲区品牌大使（2024年3月官宣）', image: '/assets/goods/g222.png', kind: 'ip', ipNames: ['金高银', 'kim goeun', 'kimgoeun', '高银'] },
+  { id: 'g223', name: '香奈儿 CHANEL 香水/腕表礼盒', brand: '香奈儿', tags: ['美妆', '香水', '腕表', '高端'], price: '2000-8000元', desc: '韩孝周任香奈儿品牌大使，经典香水腕表', image: '/assets/goods/g223.png', kind: 'ip', ipNames: ['韩孝周', 'han hyojoo', 'hanhyojoo', '孝周'] },
+  { id: 'g224', name: '蒂芙尼 Tiffany 珠宝', brand: '蒂芙尼', tags: ['珠宝', '饰品', '高端', '浪漫'], price: '3000-15000元', desc: '韩孝周任蒂芙尼品牌大使，经典T系列', image: '/assets/goods/g224.png', kind: 'ip', ipNames: ['韩孝周', 'han hyojoo', 'hanhyojoo', '孝周'] },
+  { id: 'g225', name: '路易威登 LV 丝巾/配饰礼盒', brand: '路易威登', tags: ['时尚', '丝巾', '配饰', '高端'], price: '2000-6000元', desc: '韩孝周任路易威登品牌大使，经典丝巾配饰', image: '/assets/goods/g225.png', kind: 'ip', ipNames: ['韩孝周', 'han hyojoo', 'hanhyojoo', '孝周'] },
+  { id: 'g226', name: '玳美雅 DAMIANI 珠宝', brand: '玳美雅', tags: ['珠宝', '饰品', '高端', '意式'], price: '5000-30000元', desc: '李圣经任玳美雅品牌代言人（2024年出席品牌100周年活动）', image: '/assets/goods/g226.png', kind: 'ip', ipNames: ['李圣经', 'lee sungkyung', 'leesungkyung', '圣经'] },
+  { id: 'g227', name: '思波绮 TSUBAKI 洗护礼盒', brand: '思波绮', tags: ['美妆', '洗护', '日本', '修护'], price: '50-150元', desc: '李圣经任思波绮2024年度品牌大使，花王旗下洗护', image: '/assets/goods/g227.png', kind: 'ip', ipNames: ['李圣经', 'lee sungkyung', 'leesungkyung', '圣经'] },
+  { id: 'g228', name: '芭比波朗 Bobbi Brown 彩妆', brand: '芭比波朗', tags: ['美妆', '彩妆', '高端', '清透'], price: '200-600元', desc: '金裕贞任芭比波朗亚太区品牌大使（2024年8月官宣）', image: '/assets/goods/g228.png', kind: 'ip', ipNames: ['金裕贞', 'kim yoojung', 'kimyoojung', '裕贞'] },
+  { id: 'g229', name: 'DAZY 时尚女装', brand: 'DAZY', tags: ['服饰', '女装', '潮流', '年轻'], price: '100-400元', desc: '金裕贞任DAZY首位全球代言人（2024年6月官宣）', image: '/assets/goods/g229.png', kind: 'ip', ipNames: ['金裕贞', 'kim yoojung', 'kimyoojung', '裕贞'] },
+  { id: 'g230', name: 'JM Solution 面膜护肤', brand: 'JM Solution', tags: ['美妆', '护肤', '面膜', '韩妆'], price: '50-150元', desc: '金所泫任JM Solution全球大使（2022年8月官宣）', image: '/assets/goods/g230.png', kind: 'ip', ipNames: ['金所泫', 'kim sohyun', 'kimsohyun', '所泫'] },
+  { id: 'g231', name: 'SOUP 韩系女装', brand: 'SOUP', tags: ['服饰', '女装', '韩风', '休闲'], price: '200-600元', desc: '金所泫任SOUP品牌代言模特（2015年起长期合作）', image: '/assets/goods/g231.png', kind: 'ip', ipNames: ['金所泫', 'kim sohyun', 'kimsohyun', '所泫'] },
+  { id: 'g232', name: '麦馨 MAXIM 咖啡礼盒', brand: '麦馨', tags: ['饮品', '咖啡', '速溶', '韩系'], price: '50-150元', desc: '朴宝英任MAXIM MOCHA GOLD代言人（2024年3月签约）', image: '/assets/goods/g232.png', kind: 'ip', ipNames: ['朴宝英', 'park boyoung', 'parkboyoung', '宝英'] },
+  { id: 'g233', name: '济州三多水 矿泉水', brand: '济州三多水', tags: ['饮品', '矿泉水', '健康', '韩系'], price: '20-60元', desc: '朴宝英任济州三多水广告模特（2025年4月官宣）', image: '/assets/goods/g233.png', kind: 'ip', ipNames: ['朴宝英', 'park boyoung', 'parkboyoung', '宝英'] },
+  { id: 'g234', name: '普拉达 PRADA 服饰/手袋', brand: '普拉达', tags: ['时尚', '服饰', '手袋', '高端'], price: '3000-15000元', desc: '金泰梨任普拉达品牌大使（2021年起）', image: '/assets/goods/g234.png', kind: 'ip', ipNames: ['金泰梨', 'kim taeri', 'kimtaeri', '泰梨'] },
+  { id: 'g235', name: '普拉达美妆 PRADA Beauty', brand: '普拉达美妆', tags: ['美妆', '彩妆', '香水', '高端'], price: '300-1000元', desc: '金泰梨任普拉达美妆韩国首位彩妆香水品牌大使（2024年官宣）', image: '/assets/goods/g235.png', kind: 'ip', ipNames: ['金泰梨', 'kim taeri', 'kimtaeri', '泰梨'] },
+  { id: 'g236', name: 'Golden Dew 高级珠宝', brand: 'Golden Dew', tags: ['珠宝', '饰品', '高端', '韩系'], price: '3000-15000元', desc: '金泰梨任Golden Dew品牌代言人（2025年官宣）', image: '/assets/goods/g236.png', kind: 'ip', ipNames: ['金泰梨', 'kim taeri', 'kimtaeri', '泰梨'] },
+  { id: 'g237', name: '伯爵 Piaget 珠宝腕表', brand: '伯爵', tags: ['珠宝', '腕表', '高端', '经典'], price: '30000-100000元', desc: '河智苑任伯爵珠宝大使（金马奖伯爵大使、Possession活动大使）', image: '/assets/goods/g237.png', kind: 'ip', ipNames: ['河智苑', 'ha jiwon', 'hajiwon', '智苑'] },
+  { id: 'g238', name: '瑾泉 护肤', brand: '瑾泉', tags: ['美妆', '护肤', '补水', '国货'], price: '100-300元', desc: '金泰熙任瑾泉品牌代言人（2015年品牌十周年官方宣布）', image: '/assets/goods/g238.png', kind: 'ip', ipNames: ['金泰熙', 'kim taehee', 'kimtaehee', '泰熙'] },
+  { id: 'g239', name: '金蔻 JKO 面膜', brand: '金蔻', tags: ['美妆', '护肤', '面膜', '国货'], price: '50-150元', desc: '金泰熙任金蔻JKO品牌形象代言人（2014年签约）', image: '/assets/goods/g239.png', kind: 'ip', ipNames: ['金泰熙', 'kim taehee', 'kimtaehee', '泰熙'] },
+  { id: 'g240', name: '爱诗珂思 IsaKnox 护肤', brand: '爱诗珂思', tags: ['美妆', '护肤', '高端', '韩妆'], price: '300-1000元', desc: '韩佳人任爱诗珂思ISA KNOX形象代言人（LG生活健康）', image: '/assets/goods/g240.png', kind: 'ip', ipNames: ['韩佳人', 'han gain', 'hangain', '佳人'] },
+  { id: 'g241', name: '彤人秘 红参护肤', brand: '彤人秘', tags: ['美妆', '护肤', '红参', '韩妆'], price: '300-1000元', desc: '韩佳人任彤人秘品牌代言人（KGC人参公社旗下）', image: '/assets/goods/g241.png', kind: 'ip', ipNames: ['韩佳人', 'han gain', 'hangain', '佳人'] },
+  { id: 'g242', name: '爱氏妈妈 高端奶粉', brand: '爱氏妈妈', tags: ['母婴', '奶粉', '高端', '韩系'], price: '200-500元', desc: '金喜善任爱氏妈妈全线产品代言人（2020年10月官宣）', image: '/assets/goods/g242.png', kind: 'ip', ipNames: ['金喜善', 'kim heesun', 'kimheesun', '喜善'] },
+  { id: 'g243', name: 'ISA KNOX 抗老护肤', brand: 'ISA KNOX', tags: ['美妆', '护肤', '抗老', '高端'], price: '500-1500元', desc: '金喜善任ISA KNOX品牌代言人（2018年LG官宣）', image: '/assets/goods/g243.png', kind: 'ip', ipNames: ['金喜善', 'kim heesun', 'kimheesun', '喜善'] },
+  { id: 'g244', name: 'Glutanex 护肤', brand: 'Glutanex', tags: ['美妆', '护肤', '美白', '韩妆'], price: '100-300元', desc: '宋智孝任Glutanex品牌大使（2023年官方确认）', image: '/assets/goods/g244.png', kind: 'ip', ipNames: ['宋智孝', 'song jihyo', 'songjihyo', '智孝'] },
+  { id: 'g245', name: '皙俪思 CLIV 护肤', brand: '皙俪思', tags: ['美妆', '护肤', '蜗牛', '韩妆'], price: '100-300元', desc: '宋智孝任CLIV中国区品牌代言人', image: '/assets/goods/g245.png', kind: 'ip', ipNames: ['宋智孝', 'song jihyo', 'songjihyo', '智孝'] },
+  { id: 'g246', name: '路易威登 LV 手袋/丝巾礼盒', brand: '路易威登', tags: ['时尚', '手袋', '丝巾', '高端'], price: '3000-10000元', desc: '金泰妍任路易威登品牌合作代言人（2022年起）', image: '/assets/goods/g246.png', kind: 'ip', ipNames: ['金泰妍', 'kim taeyeon', 'kimtaeyeon', '泰妍', 'taeyeon'] },
+  { id: 'g247', name: '贝玲妃 Benefit 彩妆', brand: '贝玲妃', tags: ['美妆', '彩妆', '眉妆', '年轻'], price: '100-400元', desc: '金泰妍任贝玲妃韩国区代言人（2022年）', image: '/assets/goods/g247.png', kind: 'ip', ipNames: ['金泰妍', 'kim taeyeon', 'kimtaeyeon', '泰妍', 'taeyeon'] },
+  { id: 'g49', name: '香奈儿 N°5 香水礼盒', brand: '香奈儿', tags: ['美妆', '香水', '高端', '经典'], price: '500-1000元', desc: '周迅任香奈儿中国形象大使多年，经典五号香水礼盒，优雅气质之选', image: '/assets/goods/g49.png', kind: 'ip', ipNames: ['周迅', 'zhou xun', 'zhouxun'] },
+  { id: 'g50', name: '古驰 Gucci 香水/手袋礼盒', brand: '古驰', tags: ['时尚', '香水', '手袋', '高端'], price: '1000-5000元', desc: '李宇春任古驰Gucci品牌代言人，时尚icon之选', image: '/assets/goods/g50.png', kind: 'ip', ipNames: ['李宇春', 'li yuchun', 'liyuchun'] },
+  { id: 'g51', name: '优衣库 UNIQLO 质感服饰礼盒', brand: '优衣库', tags: ['服饰', '基础款', '百搭', '实用'], price: '200-800元', desc: '倪妮任优衣库全球品牌大使多年，基础款也能穿出高级感', image: '/assets/goods/g51.png', kind: 'ip', ipNames: ['倪妮', 'ni ni', 'nini'] },
+  { id: 'g52', name: 'Burberry 博柏利 香水/围巾礼盒', brand: 'Burberry', tags: ['时尚', '香水', '高端', '英伦'], price: '500-2000元', desc: '周冬雨任Burberry品牌代言人，英伦格调单品', image: '/assets/goods/g52.png', kind: 'ip', ipNames: ['周冬雨', 'zhou dongyu', 'zhoudongyu'] },
+  { id: 'g53', name: '巴黎欧莱雅 复颜抗皱护肤套装', brand: '巴黎欧莱雅', tags: ['美妆', '护肤', '抗老', '大众'], price: '200-500元', desc: '巩俐任巴黎欧莱雅全球代言人，复颜系列抗老标杆', image: '/assets/goods/g53.png', kind: 'ip', ipNames: ['巩俐', 'gong li', 'gongli'] },
+  { id: 'g54', name: '路易威登 LV 香水/丝巾礼盒', brand: '路易威登', tags: ['时尚', '香水', '高端', '旅行'], price: '1000-3000元', desc: '朱一龙任路易威登品牌大使，LV香水丝巾经典单品', image: '/assets/goods/g54.png', kind: 'ip', ipNames: ['朱一龙', 'zhu yilong', 'zhuyilong'] },
+  { id: 'g55', name: 'Fendi 芬迪 香水/卡包礼盒', brand: 'Fendi', tags: ['时尚', '香水', '配饰', '高端'], price: '1000-4000元', desc: '王嘉尔任Fendi品牌大使，意式奢华单品', image: '/assets/goods/g55.png', kind: 'ip', ipNames: ['王嘉尔', 'jackson wang', 'jacksonwang'] },
+  { id: 'g56', name: 'Fendi 芬迪 复古配饰礼盒', brand: 'Fendi', tags: ['时尚', '配饰', '饰品', '高端'], price: '1000-4000元', desc: '古力娜扎任Fendi品牌大使，罗马复古风配饰', image: '/assets/goods/g56.png', kind: 'ip', ipNames: ['古力娜扎', 'gulnazar', '娜扎'] },
+  { id: 'g57', name: '悦诗风吟 绿茶籽精华护肤套装', brand: '悦诗风吟', tags: ['美妆', '护肤', '补水', '学生党'], price: '100-300元', desc: '林允儿任悦诗风吟代言人多年，绿茶籽精华口碑爆款', image: '/assets/goods/g57.png', kind: 'ip', ipNames: ['林允儿', 'yoona'] },
+  { id: 'g58', name: '迪奥 Dior 口红/香水礼盒', brand: '迪奥', tags: ['美妆', '彩妆', '香水', '高端'], price: '300-1000元', desc: '金智秀(Jisoo)任Dior全球品牌大使，口红香水经典款', image: '/assets/goods/g58.png', kind: 'ip', ipNames: ['金智秀', 'jisoo'] },
+  { id: 'g59', name: 'PEACEMINUSONE × Nike Air Force 1 联名鞋', brand: 'Nike', tags: ['运动', '球鞋', '联名', '潮流'], price: '800-2000元', desc: '权志龙主理品牌PEACEMINUSONE与Nike联名，AF1雏菊元素经典款', image: '/assets/goods/g59.png', kind: 'ip', ipNames: ['权志龙', 'gd', 'g-dragon'] },
+  { id: 'g60', name: '古驰 Gucci 香水/时装礼盒', brand: '古驰', tags: ['时尚', '香水', '高端', '舞台'], price: '1500-5000元', desc: '金钟仁(KAI)任Gucci品牌代言人，舞台巅峰同款时尚单品', image: '/assets/goods/g60.png', kind: 'ip', ipNames: ['金钟仁', 'kai'] },
+  { id: 'g61', name: '菲诗小铺 洁面/护肤礼盒', brand: '菲诗小铺', tags: ['美妆', '护肤', '洁面', '平价'], price: '50-150元', desc: '裴秀智任菲诗小铺代言人，国民初恋同款洁面', image: '/assets/goods/g61.png', kind: 'ip', ipNames: ['裴秀智', 'suzy', '秀智'] },
+  { id: 'g62', name: '香奈儿 Chanel 彩妆礼盒', brand: '香奈儿', tags: ['美妆', '彩妆', '高端', '口红'], price: '300-800元', desc: '柳智敏(Karina)任香奈儿品牌大使，彩妆经典款', image: '/assets/goods/g62.png', kind: 'ip', ipNames: ['柳智敏', 'karina'] },
+  { id: 'g63', name: '香奈儿 Chanel 香水/手袋礼盒', brand: '香奈儿', tags: ['时尚', '香水', '手袋', '高端'], price: '2000-8000元', desc: 'NewJeans金玟池(Minji)任香奈儿品牌大使，经典款手袋香水', image: '/assets/goods/g63.png', kind: 'ip', ipNames: ['金玟池', 'minji'] },
+  { id: 'g64', name: '古驰 Gucci 香水礼盒', brand: '古驰', tags: ['时尚', '香水', '高端', '青春'], price: '500-1500元', desc: 'NewJeans范玉欣(Hanni)任古驰品牌大使，少女感香水礼盒', image: '/assets/goods/g64.png', kind: 'ip', ipNames: ['范玉欣', 'hanni'] },
+  { id: 'g65', name: 'Burberry 博柏利 风衣/香水礼盒', brand: 'Burberry', tags: ['时尚', '服饰', '高端', '英伦'], price: '2000-8000元', desc: 'NewJeans牟智慧(Danielle)任Burberry品牌大使，经典风衣格纹', image: '/assets/goods/g65.png', kind: 'ip', ipNames: ['牟智慧', 'danielle'] },
+  { id: 'g66', name: '迪奥 Dior 手袋/香水礼盒', brand: '迪奥', tags: ['时尚', '手袋', '高端', '优雅'], price: '2000-8000元', desc: 'NewJeans姜谐潾(Haerin)任Dior品牌大使，优雅手袋香水', image: '/assets/goods/g66.png', kind: 'ip', ipNames: ['姜谐潾', 'haerin'] },
+  { id: 'g67', name: '路易威登 LV 手袋礼盒', brand: '路易威登', tags: ['时尚', '手袋', '高端', '经典'], price: '3000-10000元', desc: 'NewJeans李惠仁(Hyein)任路易威登品牌大使，经典手袋', image: '/assets/goods/g67.png', kind: 'ip', ipNames: ['李惠仁', 'hyein'] },
+  { id: 'g68', name: '蒂芙尼 Tiffany 项链/首饰礼盒', brand: '蒂芙尼', tags: ['珠宝', '饰品', '高端', '浪漫'], price: '1000-5000元', desc: '韩素希任蒂芙尼品牌大使，经典T系列项链', image: '/assets/goods/g68.png', kind: 'ip', ipNames: ['韩素希', 'han sohee', 'hansohee'] },
+  { id: 'g69', name: '雪花秀 滋盈生参养礼盒', brand: '雪花秀', tags: ['美妆', '护肤', '高端', '韩妆'], price: '500-1500元', desc: '李英爱任雪花秀代言人多年，韩方草本高端护肤', image: '/assets/goods/g69.png', kind: 'ip', ipNames: ['李英爱', 'lee youngae', 'leeyoungae'] },
+  { id: 'g23', name: '华为 ULTIMATE DESIGN 非凡大师 智能腕表', brand: '华为', tags: ['数码', '科技', '高端', '商务'], price: '6000-16000元', desc: '刘德华代言，华为非凡大师系列涵盖高端手机与智能腕表，商务科技感拉满', image: '/assets/goods/g23.png', kind: 'ip', ipNames: ['刘德华', '华仔', 'andy lau'] },
+  { id: 'g24', name: '泸州老窖·国窖1573 白酒礼盒', brand: '泸州老窖', tags: ['酒类', '白酒', '长辈', '高端'], price: '500-1000元', desc: '成龙任国窖1573文化传播大使，经典浓香白酒，送长辈显档次', image: '/assets/goods/g24.png', kind: 'ip', ipNames: ['成龙', 'jackie chan'] },
+  { id: 'g25', name: 'REDMI K90 Pro 手机', brand: '红米', tags: ['数码', '手机', '科技', '年轻'], price: '2500-4000元', desc: '陈奕迅任REDMI声学大使，K90 Pro与Bose联合调音，音质旗舰', image: '/assets/goods/g25.png', kind: 'ip', ipNames: ['陈奕迅', 'eason'] },
+  { id: 'g26', name: '赫莲娜 绿宝瓶/黑绷带 护肤套装', brand: '赫莲娜', tags: ['美妆', '护肤', '高端'], price: '1000-3000元', desc: '王菲任赫莲娜全球代言人七年，高端抗老护肤标杆', image: '/assets/goods/g26.png', kind: 'ip', ipNames: ['王菲', 'faye wong'] },
+  { id: 'g27', name: '康师傅冰红茶 音乐限量礼盒', brand: '康师傅', tags: ['饮品', '零食', '年轻'], price: '40-80元', desc: '林俊杰代言，限量音乐主题包装含语音彩蛋，追星饮品首选', image: '/assets/goods/g27.png', kind: 'ip', ipNames: ['林俊杰', 'jj', 'jj lin'] },
+  { id: 'g28', name: '五粮液·一见倾心 低度白酒礼盒', brand: '五粮液', tags: ['酒类', '低度酒', '年轻', '浪漫'], price: '399-798元', desc: '邓紫棋全球代言，29°低度白酒，天青色水晶瓶身，浪漫七夕礼物感', image: '/assets/goods/g28.png', kind: 'ip', ipNames: ['邓紫棋', 'g.e.m.', 'gem'] },
+  { id: 'g29', name: '君佩 黄金貔貅项链/手链', brand: '君佩JEMPER', tags: ['珠宝', '黄金', '饰品', '高端'], price: '1000-5000元', desc: '张艺兴全球首位品牌代言人，珠宝级黄金，貔貅/竹节等吉祥款式', image: '/assets/goods/g29.png', kind: 'ip', ipNames: ['张艺兴', 'lay'] },
+  { id: 'g30', name: '福鹿家 精酿鲜啤礼盒', brand: '福鹿家', tags: ['饮品', '精酿', '年轻'], price: '40-90元', desc: '鹿晗全球代言，蜜雪旗下平价鲜啤，鹿logo与代言人天然契合', image: '/assets/goods/g30.png', kind: 'ip', ipNames: ['鹿晗', 'luhan'] },
+  { id: 'g31', name: '玉泽 屏障修护护肤礼盒', brand: '玉泽', tags: ['美妆', '护肤', '敏感肌'], price: '100-300元', desc: '杨紫首位全球护肤代言人，皮肤屏障修护口碑款', image: '/assets/goods/g31.png', kind: 'ip', ipNames: ['杨紫', 'yz'] },
+  { id: 'g32', name: '宝曼兰朵 Pomellato 轻奢珠宝', brand: '宝曼兰朵', tags: ['珠宝', '饰品', '高端', '轻奢'], price: '3000-10000元', desc: '杨紫全球品牌代言人，意大利彩色宝石轻奢珠宝', image: '/assets/goods/g32.png', kind: 'ip', ipNames: ['杨紫', 'yz'] },
+  { id: 'g33', name: '格力高百醇 唐嫣推荐礼盒', brand: '格力高', tags: ['零食', '甜品', '女生'], price: '30-70元', desc: '唐嫣代言，芯意嫣选礼盒含定制小卡周边', image: '/assets/goods/g33.png', kind: 'ip', ipNames: ['唐嫣', 'tang yan', 'tangyan'] },
+  { id: 'g34', name: '克丽缇娜 院线护肤套装', brand: '克丽缇娜', tags: ['美妆', '护肤', '院线'], price: '300-800元', desc: '刘诗诗全球品牌代言人，专业院线护理品牌', image: '/assets/goods/g34.png', kind: 'ip', ipNames: ['刘诗诗', 'liu shishi', 'liushishi'] },
+  { id: 'g35', name: '茉寻 MOUTION 秋冬贴身服饰', brand: '茉寻', tags: ['服饰', '穿搭', '女生', '保暖'], price: '100-300元', desc: 'Angelababy代言，丝袜/小黑裤等贴身服饰，实用与时尚兼备', image: '/assets/goods/g35.png', kind: 'ip', ipNames: ['杨颖', 'angelababy'] },
+  { id: 'g36', name: '每日鲜语 高端鲜奶礼盒', brand: '每日鲜语', tags: ['饮品', '牛奶', '健康'], price: '50-100元', desc: '肖战品牌代言人，高端冷藏鲜奶，健康送礼之选', image: '/assets/goods/g36.png', kind: 'ip', ipNames: ['肖战', 'xiao zhan', 'xz'] },
+  { id: 'g37', name: '乐高 热门IP积木套装', brand: '乐高', tags: ['玩具', '积木', '收藏', '桌搭'], price: '100-2000元', desc: '王一博品牌代言人，经典积木玩具，全年龄通吃', image: '/assets/goods/g37.png', kind: 'ip', ipNames: ['王一博', 'wang yibo', 'wyb'] },
+  { id: 'g38', name: 'FILA 运动服饰', brand: 'FILA', tags: ['服饰', '运动', '穿搭', '潮流'], price: '300-1000元', desc: '易烊千玺全球品牌代言人，复古运动风穿搭', image: '/assets/goods/g38.png', kind: 'ip', ipNames: ['易烊千玺', 'jackson yee'] },
+  { id: 'g39', name: '迪奥 Dior 彩妆礼盒', brand: '迪奥', tags: ['美妆', '彩妆', '高端', '口红'], price: '300-800元', desc: '迪丽热巴全球彩妆/香氛代言人，经典口红香水礼盒', image: '/assets/goods/g39.png', kind: 'ip', ipNames: ['迪丽热巴', 'dilraba', '热巴'] },
+  { id: 'g40', name: '半亩花田 身体乳礼盒', brand: '半亩花田', tags: ['美妆', '护肤', '身体护理'], price: '50-120元', desc: '迪丽热巴身体乳&手霜全球代言人，日常护肤实用款', image: '/assets/goods/g40.png', kind: 'ip', ipNames: ['迪丽热巴', 'dilraba', '热巴'] },
+  { id: 'g41', name: '认养一头牛 牛奶礼盒', brand: '认养一头牛', tags: ['饮品', '牛奶', '健康'], price: '50-120元', desc: '赵丽颖品牌代言人，高品质牛奶，日常送礼不踩雷', image: '/assets/goods/g41.png', kind: 'ip', ipNames: ['赵丽颖', 'zhao liying', 'zly'] },
+  { id: 'g42', name: '星巴克 周杰伦主题周边杯', brand: '星巴克', tags: ['饮品', '咖啡', '周边', '收藏'], price: '100-300元', desc: '周杰伦任星巴克中国品牌大使，歌词款冷热杯主题周边', image: '/assets/goods/g42.png', kind: 'ip', ipNames: ['周杰伦', 'jay chou', '周董'] },
+  { id: 'g43', name: '修丽可 抗老精华套装', brand: '修丽可', tags: ['美妆', '护肤', '抗老', '高端'], price: '500-1500元', desc: '胡歌品牌代言人，专业科学护肤，A.G.E.家族明星产品', image: '/assets/goods/g43.png', kind: 'ip', ipNames: ['胡歌', 'hu ge', 'huge'] },
+  { id: 'g44', name: '德芙 巧克力礼盒', brand: '德芙', tags: ['零食', '巧克力', '甜品'], price: '50-200元', desc: '刘亦菲品牌代言人，经典巧克力，浪漫送礼不出错', image: '/assets/goods/g44.png', kind: 'ip', ipNames: ['刘亦菲', 'liu yifei', '天仙'] },
+  { id: 'g45', name: '法国娇兰 护肤/香氛套装', brand: '娇兰', tags: ['美妆', '香氛', '高端'], price: '500-1500元', desc: '杨洋全球品牌代言人十年，经典香水与帝皇蜂姿护肤', image: '/assets/goods/g45.png', kind: 'ip', ipNames: ['杨洋', 'yang yang'] },
+  { id: 'g46', name: '后 WHOO 高端护肤套装', brand: '后', tags: ['美妆', '护肤', '高端'], price: '500-1500元', desc: '李现全球品牌代言人，韩国高端宫廷护肤', image: '/assets/goods/g46.png', kind: 'ip', ipNames: ['李现', 'li xian', 'lx'] },
+  { id: 'g47', name: '雅诗兰黛 护肤/彩妆套装', brand: '雅诗兰黛', tags: ['美妆', '护肤', '高端'], price: '300-1500元', desc: '杨幂代言，经典小棕瓶与彩妆系列，口碑稳定', image: '/assets/goods/g47.png', kind: 'ip', ipNames: ['杨幂', 'yang mi', 'ym'] },
+  { id: 'g48', name: '凯度 蒸烤一体机', brand: '凯度', tags: ['家电', '厨房', '家居'], price: '2000-6000元', desc: '杨幂全球代言人，家用蒸烤箱，品质厨房之选', image: '/assets/goods/g48.png', kind: 'ip', ipNames: ['杨幂', 'yang mi', 'ym'] },
+  { id: 'g01', name: '机械键盘', brand: 'Keychron', tags: ['游戏', '数码', '工作', '桌搭'], price: '399-599元', desc: '红轴静音，适合办公与游戏兼顾', image: '/assets/goods/g01.png' },
+  { id: 'g02', name: '无线降噪耳机', brand: 'Sony', tags: ['数码', '通勤', '音乐', '简约'], price: '1499-1999元', desc: '降噪旗舰，通勤利器', image: '/assets/goods/g02.png' },
+  { id: 'g03', name: '手冲咖啡器具套装', brand: 'Hario', tags: ['咖啡', '居家', '文艺', '仪式感'], price: '200-400元', desc: '精品咖啡入门全套', image: '/assets/goods/g03.png' },
+  { id: 'g04', name: '香薰加湿器', brand: 'MUJI', tags: ['居家', '简约', '日系', '解压'], price: '150-300元', desc: '氛围感与实用性兼备', image: '/assets/goods/g04.png' },
+  { id: 'g05', name: '斯凯奇运动鞋', brand: 'Skechers', tags: ['运动', '休闲', '舒适', '日常'], price: '400-700元', desc: '舒适百搭，日常通勤', image: '/assets/goods/g05.png' },
+  { id: 'g06', name: '手办/潮玩盲盒', brand: '泡泡玛特', tags: ['二次元', '潮玩', '收藏', '可爱'], price: '59-299元', desc: '契合二次元审美的收藏单品', image: '/assets/goods/g06.png', kind: 'ip' },
+  { id: 'g07', name: '电子手账本', brand: '华为', tags: ['数码', '学习', '效率', '极简'], price: '2000-4000元', desc: '无纸化学习/日程管理', image: '/assets/goods/g07.png' },
+  { id: 'g08', name: '黑胶唱片机', brand: '梵尼诗', tags: ['音乐', '复古', '文艺', '氛围'], price: '800-2000元', desc: '复古音质与摆件属性兼备', image: '/assets/goods/g08.png' },
+  { id: 'g09', name: '电竞椅', brand: '傲风', tags: ['游戏', '桌搭', '宅家', '舒适'], price: '800-2000元', desc: '游戏宅家的主力装备', image: '/assets/goods/g09.png' },
+  { id: 'g10', name: '真丝睡眠眼罩套装', brand: 'Manito', tags: ['居家', '睡眠', '精致', '温柔'], price: '200-500元', desc: '生活品质细节的关怀', image: '/assets/goods/g10.png' },
+  { id: 'g11', name: '单反/拍立得相机', brand: '富士', tags: ['摄影', '文艺', '街拍', '复古'], price: '800-3000元', desc: '记录生活瞬间的礼物', image: '/assets/goods/g11.png' },
+  { id: 'g12', name: '智能手表', brand: 'Apple', tags: ['数码', '运动', '通勤', '科技'], price: '2000-4000元', desc: '健康与便利的科技礼物', image: '/assets/goods/g12.png' },
+  { id: 'g13', name: '汉服/和风服饰周边', brand: '十三余', tags: ['二次元', '国风', '穿搭', '文艺'], price: '200-800元', desc: '契合国风穿搭审美的单品', image: '/assets/goods/g13.png', kind: 'ip' },
+  { id: 'g14', name: '漫画/设定集', brand: '鹰角', tags: ['二次元', '收藏', '游戏', '文艺'], price: '100-300元', desc: '二次元用户的心头好', image: '/assets/goods/g14.png', kind: 'ip' },
+  { id: 'g15', name: '桌面氛围灯', brand: 'Yeelight', tags: ['桌搭', '氛围', '极简', '居家'], price: '150-400元', desc: '赛博桌面氛围担当', image: '/assets/goods/g15.png' },
+  { id: 'g16', name: '瑜伽垫', brand: 'Keep', tags: ['运动', '健康', '居家', '自律'], price: '100-300元', desc: '自律人群的运动装备', image: '/assets/goods/g16.png' },
+  { id: 'g17', name: '原神 角色手办/立牌', brand: '米哈游', tags: ['二次元', '游戏', '收藏', '桌搭'], price: '100-300元', desc: '可莉/钟离/胡桃等热门角色正比例手办或立牌，二次元桌面陈列首选', image: '/assets/goods/g17.png', ipNames: ['原神', 'genshin', '可莉', '钟离', '胡桃'], kind: 'ip' },
+  { id: 'g18', name: '火影忍者 忍者手办摆件', brand: '百联', tags: ['二次元', '收藏', '动漫'], price: '100-300元', desc: '鸣人/佐助忍者手办摆件，火影迷的收藏佳品', image: '/assets/goods/g18.png', ipNames: ['火影忍者', '火影', '鸣人', '佐助'], kind: 'ip' },
+  { id: 'g19', name: '海贼王 路飞草帽周边手办', brand: '万代', tags: ['二次元', '收藏', '动漫'], price: '150-400元', desc: '路飞草帽造型手办，海贼王人气周边', image: '/assets/goods/g19.png', ipNames: ['海贼王', '海贼', '路飞'], kind: 'ip' },
+  { id: 'g20', name: '鬼灭之刃 祢豆子手办', brand: '万代', tags: ['二次元', '收藏', '动漫'], price: '150-350元', desc: '祢豆子/炭治郎造型手办，鬼灭之刃粉丝收藏款', image: '/assets/goods/g20.png', ipNames: ['鬼灭之刃', '鬼灭', '祢豆子', '炭治郎'], kind: 'ip' },
+  { id: 'g21', name: '明日方舟 干员立牌', brand: '鹰角', tags: ['二次元', '游戏', '收藏', '桌搭'], price: '80-200元', desc: '阿米娅等干员亚克力立牌，桌面桌搭装饰佳品', image: '/assets/goods/g21.png', ipNames: ['明日方舟', '舟游', '阿米娅'], kind: 'ip' },
+  { id: 'g22', name: '宝可梦 精灵球收藏摆件', brand: 'TOMY', tags: ['二次元', '收藏', '可爱'], price: '100-300元', desc: '皮卡丘主题精灵球收藏摆件，可爱又值得收藏', image: '/assets/goods/g22.png', ipNames: ['宝可梦', '精灵宝可梦', '皮卡丘', 'pokemon'], kind: 'ip' }
+];
+
+// 在 matchGoods 中命中 IP 时给"周边/联名"类商品加成
+const IP_BOOST = 6;
+
+// 解析商品价格字符串（如 "399-599元" / "150-300元"）为数值范围 [min, max]
+function parsePrice(str) {
+  const m = String(str || '').match(/(\d+(?:\.\d+)?)\s*[-~]\s*(\d+(?:\.\d+)?)/);
+  if (m) return [parseFloat(m[1]), parseFloat(m[2])];
+  const n = String(str || '').match(/(\d+(?:\.\d+)?)/);
+  if (n) return [parseFloat(n[1]), parseFloat(n[1])];
+  return null;
+}
+
+// 基于风格标签匹配商品；styleTags 来自 AI 识别出的风格关键词
+// priceRange: { min, max } 可选，过滤商品价格区间（与预算有交集才保留，无约束则全量）
+// ip: 可选，识别到的明星/动漫/角色 IP（字符串或 {name,type}），命中时给"周边/联名/收藏"类商品加权
+function matchGoods(styleTags, targetCount = 8, priceRange, ip) {
+  const tags = (styleTags || []).map(t => String(t).toLowerCase());
+  const ipName = ip ? (typeof ip === 'string' ? ip : (ip.name || '')) : '';
+  const ipType = ip && typeof ip === 'object' ? (ip.type || '') : '';
+  const ipHit = ipName.trim();
+  let scored = GOODS.map(g => {
+    let score = 0;
+    g.tags.forEach(t => {
+      if (tags.includes(String(t).toLowerCase())) score += 2;
+      // 部分匹配（如"游戏"与"二次元"）
+      if (tags.some(s => s.includes(String(t).toLowerCase()) || String(t).toLowerCase().includes(s))) score += 1;
+    });
+    // IP 命中：优先"周边/联名/收藏"类商品（kind==='ip'），且 IP 名/类型命中该商品标签
+    if (ipHit) {
+      const gTags = g.tags.map(x => String(x).toLowerCase()).join('/');
+      if (g.kind === 'ip') score += IP_BOOST;
+      // 如动漫/明星与"二次元/潮玩/收藏"类相互印证，额外加成
+      if ((/二次元|动漫|明星|爱豆|影视/.test(ipType + ipHit)) && /二次元|潮玩|收藏|国风|周边/.test(gTags)) score += 2;
+    }
+    // IP 名称精确命中：ip 为对象 {name, work, type} 时，其 name 或 work 与商品 ipNames 中任一别名做大小写不敏感的双向子串匹配，命中给高权重（确保进入 Top 8）
+    const ipWork = ip && typeof ip === 'object' ? (ip.work || '') : '';
+    const ipHitL = ipHit ? ipHit.toLowerCase() : '';
+    const ipWorkL = ipWork ? String(ipWork).toLowerCase() : '';
+    let ipMatch = false;
+    if ((ipHitL || ipWorkL) && Array.isArray(g.ipNames) && g.ipNames.length) {
+      ipMatch = g.ipNames.some(alias => {
+        const a = String(alias).toLowerCase();
+        return (ipHitL && (a.includes(ipHitL) || ipHitL.includes(a))) ||
+               (ipWorkL && (a.includes(ipWorkL) || ipWorkL.includes(a)));
+      });
+      if (ipMatch) score += 30;
+    }
+    // ipMatch 为内部布尔标记（不含任何名称），供调用方识别"本次精确命中的 IP 周边商品"以做榜单守护
+    return ipMatch ? { ...g, score, ipMatch: true } : { ...g, score };
+  });
+
+  // 价格约束过滤：商品价格区间与预算区间有交集才保留
+  if (priceRange && (priceRange.min != null || priceRange.max != null)) {
+    const min = priceRange.min != null ? Number(priceRange.min) : 0;
+    const max = priceRange.max != null ? Number(priceRange.max) : Infinity;
+    const inBudget = g => {
+      const pr = parsePrice(g.price);
+      if (!pr) return true; // 无价格数据不误杀
+      return pr[0] <= max && pr[1] >= min;
+    };
+    scored = scored.filter(inBudget);
+    // 若按风格+价格过滤后不足目标数，从全库按价格区间补齐候选（风格分较低）
+    if (scored.length < Math.min(targetCount, 3)) {
+      const fallback = GOODS.filter(g => !scored.some(s => s.id === g.id) && inBudget(g))
+        .map(g => ({ ...g, score: 0 }));
+      scored = scored.concat(fallback);
+    }
+  }
+
+  scored.sort((a, b) => b.score - a.score);
+  // 剔除内部字段 ipNames，避免传给前端推荐逻辑
+  return scored.slice(0, targetCount).map(({ ipNames, ...rest }) => rest);
+}
+
+module.exports = { GOODS, matchGoods, parsePrice };
