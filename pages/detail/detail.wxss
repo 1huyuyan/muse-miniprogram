@@ -1,3 +1,9 @@
+.good-img-fallback {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: #f0f0f6; color: #9a9ab0;
+}
+.fallback-name { font-size: 30rpx; color: #6c5ce7; font-weight: 600; text-align: center; padding: 0 20rpx; }
+.fallback-id { font-size: 24rpx; margin-top: 8rpx; }
 .brand-sub { color: #9a9ab0; font-size: 26rpx; margin-top: 10rpx; }
 .good-img {
   width: 100%; height: 400rpx; border-radius: 16rpx;

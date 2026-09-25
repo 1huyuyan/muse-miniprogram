@@ -19,6 +19,12 @@
   flex-shrink: 0; margin-left: 16rpx;
   background: #f0f0f6; box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.06);
 }
+.rank-thumb-fallback {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: #f0f0f6; color: #9a9ab0;
+}
+.fallback-name { font-size: 24rpx; color: #6c5ce7; font-weight: 600; text-align: center; padding: 0 10rpx; }
+.fallback-id { font-size: 20rpx; margin-top: 6rpx; }
 .rank-badge {
   width: 56rpx; height: 56rpx; border-radius: 50%;
   color: #fff; text-align: center; line-height: 56rpx;

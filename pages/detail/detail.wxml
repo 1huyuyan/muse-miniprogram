@@ -1,7 +1,11 @@
 <view class="container" wx:if="{{good}}">
   <!-- 商品基本信息 -->
   <view class="card">
-    <image class="good-img" wx:if="{{good.image}}" src="{{good.image}}" mode="aspectFill"></image>
+    <image class="good-img" wx:if="{{good.image && !good.imgFailed}}" src="{{good.image}}" mode="aspectFill" binderror="onGoodImgError"></image>
+    <view wx:else class="good-img good-img-fallback">
+      <text class="fallback-name">{{good.name}}</text>
+      <text class="fallback-id">{{good.id}}</text>
+    </view>
     <view class="title-lg">{{good.name}}</view>
     <view class="brand-sub">{{good.brand}} · 参考价 {{good.price}}</view>
     <view class="desc">{{good.desc}}</view>
